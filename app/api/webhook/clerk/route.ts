@@ -53,6 +53,9 @@ export async function POST(req: Request) {
   // Get the ID and type
   const { id } = evt.data;
   const eventType = evt.type;
+
+  // Log the incoming webhook payload
+  console.log('Received webhook event:', evt)
  
   if(eventType === 'user.created') {
     const { id, email_addresses, image_url, first_name, last_name, username } = evt.data;
@@ -66,7 +69,9 @@ export async function POST(req: Request) {
       photo: image_url,
     }
 
+    console.log('Creating user with data:', user);
     const newUser = await createUser(user);
+    console.log('Created user:', newUser);
 
     if(newUser) {
       await clerkClient.users.updateUserMetadata(id, {
@@ -79,6 +84,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: 'OK', user: newUser })
   }
 
+  // Log the incoming webhook payload
+  console.log('Received webhook event:', evt)
+
   if (eventType === 'user.updated') {
     const {id, image_url, first_name, last_name, username } = evt.data
 
@@ -88,16 +96,22 @@ export async function POST(req: Request) {
       username: username!,
       photo: image_url,
     }
-
+    console.log('Updating user with data:', user);
     const updatedUser = await updateUser(id, user)
+    console.log('Updated user:', updatedUser)
 
     return NextResponse.json({ message: 'OK', user: updatedUser })
   }
 
+  // Log the incoming webhook payload
+  console.log('Received webhook event:', evt)
+
   if (eventType === 'user.deleted') {
     const { id } = evt.data
 
+    console.log('Deleting user with id:', id);
     const deletedUser = await deleteUser(id!)
+    console.log('Deleted user:', deletedUser)
 
     return NextResponse.json({ message: 'OK', user: deletedUser })
   }
