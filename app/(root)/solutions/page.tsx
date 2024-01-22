@@ -13,7 +13,7 @@ const Services = () => {
       </div>
       <ul className='flex flex-col gap-5 md:flex-row'>
         <li className='flex flex-col items-center justify-center'>
-          <h1 className={`${archivo.className} text-4xl  text-yellow-500 font-semibold mb-3 text-center md:text-3xl`}>PDF Filler</h1>
+          <h1 className={`${archivo.className} text-4xl  text-yellow-500 font-semibold mb-3 text-center md:text-3xl`}>Document Filler</h1>
           <img 
             src="/assets/images/pdf_filler.svg"
             width={200}
