@@ -4,6 +4,10 @@ export const headerLinks = [
       route: '/dashboard',
     },
     {
+      label: 'App',
+      route: '/modules',
+    },
+    {
       label: 'Contact Us',
       route: '/contact',
     },
