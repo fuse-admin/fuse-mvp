@@ -7,7 +7,7 @@ import MobileNav from "./MobileNav"
 
 const Header = () => {
   return (
-    <header className="w-full border-b-2 border-yellow-500 mb-10">
+    <header className="w-full mb-10">
         <div className="flex items-center justify-between mt-3 p-3">
             <Link href="/" className="w-28">
                 <Image src="/assets/images/fuse_logo.svg" width={128} height={38} 

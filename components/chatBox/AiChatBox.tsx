@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Archivo } from 'next/font/google';
 import ReportingChat from "./ReportingChat";
 import { AiChatBoxProps } from "@/types";
+import DocumentFillerChat from "./DocumentFillerChat";
 
 const archivo = Archivo({ subsets: ["latin"] })
 
@@ -20,7 +21,7 @@ export default function AiChatBox({ selectedTab, setSelectedTab}: AiChatBoxProps
                     <TabsTrigger className={`${archivo.className} text-xl`} value="reporting">Reporting</TabsTrigger>
                 </TabsList>
                 <TabsContent value="document-filler">
-                    This is for filling out documents.
+                    <DocumentFillerChat />
                 </TabsContent>
                 <TabsContent value="query">
                     This is for querying responses.
