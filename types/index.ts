@@ -24,3 +24,16 @@ export type AiChatBoxProps = {
 export type InstructionBoxProps = {
   selectedTab: string;
 };
+
+// ====== ClientData Type
+export type GenericClientData = {
+  // Define the client data structure (adapt this based on actual data structure)
+  id: string;
+  name: string;
+  address: string;
+  city_state_zip: string;
+  social_security_number: string;
+  email: string;
+  telephone: string;
+  portfolio_value: number;
+};

@@ -1,24 +1,22 @@
+import { GenericClientData } from "@/types";
 
-type ClientData = {
-    // Define the client data structure (adapt this based on actual data structure)
-    id: string;
-    name: string;
-    address: string;
-    city_state_zip: string;
-    social_security_number: string;
-    email: string;
-    telephone: string;
-    portfolio_value: number;
-};
-
-export const checkClientInList = async (clientName: string): Promise<ClientData | null> => {
+export const checkClientInList = async (clientName: string, orgId: string): Promise<GenericClientData | null> => {
     try {
-        // Point to the new server route instead of the direct API
-        const response = await fetch('/api/firm-clients', {next: {revalidate: 1}});
-        if (!response.ok) {
-            throw new Error('Failed to fetch clients data.');
+        let fetchClientsFunction: () => Promise<GenericClientData[]>;
+
+        switch(orgId) {
+            case 'org_2bLHjXtOFDFbhCv7hfXMYt7ucNM':
+                fetchClientsFunction = (await import('./fuse-clients/clients')).fetchClientsForFuseAI;
+                break;
+            {/*case 'org_2Id':
+                fetchClientsFunction = (await import('./organizations/org_2/clients')).fetchClientsForOrg2;
+                break; */}
+            // Add more cases as needed
+            default:
+                throw new Error('Unknown organization ID');
         }
-        const clients: ClientData[] = await response.json();
+
+        const clients = await fetchClientsFunction();
         const clientData = clients.find(client => client.name.toLowerCase() === clientName.toLowerCase());
         return clientData || null;
     } catch (error) {

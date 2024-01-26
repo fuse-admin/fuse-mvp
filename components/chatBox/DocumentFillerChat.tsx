@@ -1,12 +1,19 @@
 'use client';
 import { useChat } from 'ai/react';
-import { useEffect, useRef } from 'react';
-import { ChatRequest, FunctionCallHandler, nanoid } from 'ai';
+import { use, useEffect, useRef } from 'react';
+import { FunctionCallHandler, nanoid } from 'ai';
 import { checkClientInList } from '@/app/api/firm-clients/clients';
 import { generateSuccessResponse } from '@/lib/utils';
 import ReactMarkdown from 'react-markdown';
- 
+import { useAuth, auth, currentUser } from '@clerk/nextjs';
+import OrganizationSetter from '../shared/OrganizationSetter';
+
 export default function DocumentFillerChat() {
+    // Set up organization setter
+    <OrganizationSetter />
+    // Get organization ID from Clerk for client search
+    const {orgId} = useAuth();
+    // Define function call handler
     const functionCallHandler: FunctionCallHandler = async(chatMessages, functionCall) => {
         console.log('Function call handler called: ', functionCall);
 
@@ -14,14 +21,21 @@ export default function DocumentFillerChat() {
         if (functionCall.name === 'fill-W-9'){
             // Ensure client name is always a string 
             const clientName = JSON.parse(functionCall.arguments ?? '{}').name ?? '';
-            chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: `Searching for client ${clientName}...` });
-            // Get client info from database
-            const clientData = await checkClientInList(clientName);
-            if (!clientData) {
-                chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: `${clientName} not found in client database.` });
+            chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` Searching for client ${clientName}...` });
+            // Check for type of orgID 
+            if (typeof orgId === 'string') {
+                // Get client info from database
+                const clientData = await checkClientInList(clientName, orgId);
+                console.log(clientData)
+                if (!clientData) {
+                    chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${clientName} not found in client database.` });
+                    return;
+                }
+                return generateSuccessResponse(chatMessages, "hello world")
+            } else {
+                chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` Cannot find the organization you are a part of. Please confirm your organization on the Team Settings page on the Dashboard.` });
                 return;
             }
-            return generateSuccessResponse(chatMessages, "hello world")
         }
     };
     
@@ -59,7 +73,7 @@ export default function DocumentFillerChat() {
                 <p className='font-semibold'>You: {m.content}</p>
             ) : (
                 <p>
-                    AI: 
+                    AI:  
                     {m.content.includes('Writing and Editing Assistance') ? (
                         <ReactMarkdown>{m.content}</ReactMarkdown>
                     ) : (
