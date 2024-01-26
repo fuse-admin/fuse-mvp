@@ -8,11 +8,14 @@ const Module = () => {
 
   return (
       <main className='flex flex-col lg:flex-row md:flex-row w-screen h-screen p-3'>
-        <section className='w-1/2'>
-          <AiChatBox
-            selectedTab={selectedTab}
-            setSelectedTab={setSelectedTab}
-          />
+        {/* Center AiChatBox within this section */}
+        <section className='w-1/2 flex justify-center items-center'>
+          <div className="w-full max-w-sm"> {/* Adjust max-width as needed */}
+            <AiChatBox
+              selectedTab={selectedTab}
+              setSelectedTab={setSelectedTab}
+            />
+          </div>
         </section>
         <section className='w-1/2 h-screen'>
           <InstructionBox

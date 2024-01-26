@@ -13,7 +13,7 @@ export default function AiChatBox({ selectedTab, setSelectedTab}: AiChatBoxProps
         setSelectedTab(tabvalue);
     }
     return (
-        <main className="w-full h-screen">
+        <main className="w-full h-screen justify-center items-center">
             <Tabs defaultValue={selectedTab} onValueChange={handleTabChange} className="w-[600px]">
                 <TabsList className="flex justify-between w-full h-12 rounded-xl">
                     <TabsTrigger className={`${archivo.className} text-xl`} value="document-filler">Document Filler</TabsTrigger>
@@ -21,6 +21,7 @@ export default function AiChatBox({ selectedTab, setSelectedTab}: AiChatBoxProps
                     <TabsTrigger className={`${archivo.className} text-xl`} value="reporting">Reporting</TabsTrigger>
                 </TabsList>
                 <TabsContent value="document-filler">
+                <div className='absolute top-0 left-0 right-0 h-10 bg-gradient-to-b from-white to-transparent'></div>
                     <DocumentFillerChat />
                 </TabsContent>
                 <TabsContent value="query">
