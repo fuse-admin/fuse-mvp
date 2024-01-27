@@ -36,12 +36,12 @@ export default function DocumentFillerCard() {
             </section>
             <section className='flex flex-col justify-center items-center mt-10 gap-5'>
                 <Button 
-                    className='w-1/2 h-10 text-2xl font-bold text-black bg-yellow-500 hover:bg-yellow-600 rounded-2xl shadow-lg'>
+                    className='w-1/2 h-10 text-xl font-bold text-black bg-yellow-500 hover:bg-yellow-600 rounded-2xl shadow-lg'>
                         Train a new sub-doc
                 </Button>
                 <Button
                     onClick={openModal} 
-                    className='w-1/2 h-10 text-2xl font-bold text-black bg-yellow-500 hover:bg-yellow-600 rounded-2xl shadow-lg'>
+                    className='w-1/2 h-10 text-xl font-bold text-black bg-yellow-500 hover:bg-yellow-600 rounded-2xl shadow-lg'>
                         View my clients
                 </Button>
             </section>

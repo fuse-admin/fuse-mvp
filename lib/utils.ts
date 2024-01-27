@@ -28,7 +28,7 @@ export const generateSuccessResponse = (chatMessages: any[], pdfUrl: string): Ch
           id: nanoid(),
           name: 'Success',
           role: 'system',
-          content: `Form filled successfully!`
+          content: `Form filled successfully! Please find your filled form in your downloads folder.`
       }],
   };
 };

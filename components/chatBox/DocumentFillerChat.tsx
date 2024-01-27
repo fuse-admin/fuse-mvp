@@ -59,7 +59,7 @@ export default function DocumentFillerChat() {
                     chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} not found in client database.` });
                     return;
                 }
-                chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} found in client database. Filling W-9...` });
+                chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} found in client database! Filling W-9...` });
                 // Fill W-9 form
                 await fillW9(clientData);
                 return generateSuccessResponse(chatMessages, "W-9 has been filled. Please find the form in your downloads!")
