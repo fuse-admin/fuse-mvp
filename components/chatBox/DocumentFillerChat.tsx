@@ -7,6 +7,28 @@ import { generateSuccessResponse } from '@/lib/utils';
 import ReactMarkdown from 'react-markdown';
 import { useAuth, auth, currentUser } from '@clerk/nextjs';
 import OrganizationSetter from '../shared/OrganizationSetter';
+import { GenericClientData } from '@/types';
+
+const fillW9 = async (clientData: GenericClientData): Promise<string | null> => {
+    fetch('/api/fillW9', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(clientData)
+    })
+    .then(response => response.blob())
+    .then(blob => {
+        // Create a link to download the filled PDF
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'filled_fw9.pdf';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+    })
+    .catch(error => console.error('Error in filling W-9 form:', error));
+    return null;
+}    
 
 export default function DocumentFillerChat() {
     // Set up organization setter
@@ -21,16 +43,25 @@ export default function DocumentFillerChat() {
         if (functionCall.name === 'fill-W-9'){
             // Ensure client name is always a string 
             const clientName = JSON.parse(functionCall.arguments ?? '{}').name ?? '';
-            chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` Searching for client ${clientName}...` });
+            let formattedClientName = clientName
+                .toLowerCase()
+                .split(' ')
+                .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+
+            chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` Searching for client ${formattedClientName}...` });
             // Check for type of orgID 
             if (typeof orgId === 'string') {
                 // Get client info from database
                 const clientData = await checkClientInList(clientName, orgId);
                 console.log(clientData)
                 if (!clientData) {
-                    chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${clientName} not found in client database.` });
+                    chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} not found in client database.` });
                     return;
                 }
+                chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} found in client database. Filling W-9...` });
+                // Fill W-9 form
+                await fillW9(clientData);
                 return generateSuccessResponse(chatMessages, "hello world")
             } else {
                 chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` Cannot find the organization you are a part of. Please confirm your organization on the Team Settings page on the Dashboard.` });
