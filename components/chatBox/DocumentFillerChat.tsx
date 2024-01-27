@@ -62,7 +62,7 @@ export default function DocumentFillerChat() {
                 chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} found in client database. Filling W-9...` });
                 // Fill W-9 form
                 await fillW9(clientData);
-                return generateSuccessResponse(chatMessages, "hello world")
+                return generateSuccessResponse(chatMessages, "W-9 has been filled. Please find the form in your downloads!")
             } else {
                 chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` Cannot find the organization you are a part of. Please confirm your organization on the Team Settings page on the Dashboard.` });
                 return;

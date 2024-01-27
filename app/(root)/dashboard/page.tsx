@@ -15,7 +15,7 @@ const Dashboard = () => {
         </div>
         <div className='relative w-1/4 h-64 p-5 rounded-2xl border-4 border-yellow-500 shadow-xl flex justify-center items-center hover:skew-y-3'>
           <img src="/assets/images/astronaut_settings.svg" alt="Character" width={100} height={75} loading='eager' style={{ position: 'absolute', top: '2rem', right: '-5rem', zIndex: 10 }} />
-          <Link href="/dashboard" className='text-2xl font-bold text-yellow-600 hover:text-yellow-800 hover:scale-125 dark:text-white dark:hover:text-white'>Beta Features</Link>
+          <Link href="/my-clients" className='text-2xl font-bold text-yellow-600 hover:text-yellow-800 hover:scale-125 dark:text-white dark:hover:text-white'>My Clients</Link>
         </div>
     </div>
     <section className='h-72'></section>
