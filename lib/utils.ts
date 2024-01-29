@@ -22,13 +22,13 @@ export const generateErrorResponse = (chatMessages: any[], errorMessage: string)
   };
 };
 
-export const generateSuccessResponse = (chatMessages: any[], pdfUrl: string): ChatRequest => {
+export const generateSuccessResponse = (chatMessages: any[], successmessage: string): ChatRequest => {
   return {
       messages: [...chatMessages, {
           id: nanoid(),
           name: 'Success',
           role: 'system',
-          content: `Form filled successfully! Please find your filled form in your downloads folder.`
+          content: successmessage
       }],
   };
 };

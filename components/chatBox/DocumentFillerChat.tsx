@@ -3,7 +3,7 @@ import { useChat } from 'ai/react';
 import { use, useEffect, useRef } from 'react';
 import { FunctionCallHandler, nanoid } from 'ai';
 import { checkClientInList } from '@/app/api/firm-clients/clients';
-import { generateSuccessResponse } from '@/lib/utils';
+import { generateErrorResponse, generateSuccessResponse } from '@/lib/utils';
 import ReactMarkdown from 'react-markdown';
 import { useAuth, auth, currentUser } from '@clerk/nextjs';
 import OrganizationSetter from '../shared/OrganizationSetter';
@@ -49,20 +49,21 @@ export default function DocumentFillerChat() {
                 .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
                 .join(' ');
 
-            chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` Searching for client ${formattedClientName}...` });
+            //chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` Searching for client ${formattedClientName}...` });
             // Check for type of orgID 
             if (typeof orgId === 'string') {
                 // Get client info from database
                 const clientData = await checkClientInList(clientName, orgId);
                 console.log(clientData)
                 if (!clientData) {
-                    chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} not found in client database.` });
-                    return;
+                    //chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} not found in client database. Please check the client list to ensure` });
+                    return generateErrorResponse(chatMessages, ` ${formattedClientName} not found in client database. Please check the client list to ensure.`);
+                    //return;
                 }
-                chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} found in client database! Filling W-9...` });
+                //chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} found in client database! Filling W-9...` });
                 // Fill W-9 form
                 await fillW9(clientData);
-                return generateSuccessResponse(chatMessages, "W-9 has been filled. Please find the form in your downloads!")
+                return generateSuccessResponse(chatMessages, `Your W-9 form for ${formattedClientName} has been filled! Please check your downloads folder for the filled form.`);
             } else {
                 chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` Cannot find the organization you are a part of. Please confirm your organization on the Team Settings page on the Dashboard.` });
                 return;
@@ -104,7 +105,7 @@ export default function DocumentFillerChat() {
                 <p className='font-semibold'>You: {m.content}</p>
             ) : (
                 <p>
-                    AI:  
+                    AI: 
                     {m.content.includes('Writing and Editing Assistance') ? (
                         <ReactMarkdown>{m.content}</ReactMarkdown>
                     ) : (
