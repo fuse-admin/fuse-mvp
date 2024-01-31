@@ -7,7 +7,7 @@ import ClientDataTable from '@/app/(root)/my-clients/data-table';
 
 const archivo = Archivo({ subsets: ["latin"] })
 
-export default function DocumentFillerCard() {
+export default function DocumentFillerCard({ openNewDocModal }: { openNewDocModal: () => void }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => setIsModalOpen(true);
@@ -35,7 +35,8 @@ export default function DocumentFillerCard() {
                 </p>
             </section>
             <section className='flex flex-col justify-center items-center mt-10 gap-5'>
-                <Button 
+                <Button
+                    onClick={openNewDocModal} 
                     className='w-1/2 h-10 text-xl font-bold text-black bg-yellow-500 hover:bg-yellow-600 rounded-2xl shadow-lg'>
                         Train a new sub-doc
                 </Button>

@@ -3,7 +3,7 @@ import { useChat } from 'ai/react';
 import { use, useEffect, useRef } from 'react';
 import { FunctionCallHandler, nanoid } from 'ai';
 import { checkClientInList } from '@/app/api/firm-clients/clients';
-import { generateErrorResponse, generateSuccessResponse } from '@/lib/utils';
+import { generateErrorResponse, generateSuccessResponse } from '@/lib/utils/utils';
 import ReactMarkdown from 'react-markdown';
 import { useAuth, auth, currentUser } from '@clerk/nextjs';
 import OrganizationSetter from '../shared/OrganizationSetter';

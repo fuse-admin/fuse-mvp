@@ -3,10 +3,16 @@ import React, { useState } from 'react';
 import AiChatBox from '@/components/chatBox/AiChatBox';
 import InstructionBox from '@/components/chatBox/InstructionBox';
 import Loader from '@/components/shared/Loader';
+import { NewDocModal } from '@/components/chatBox/NewDocModal';
+import SubDocTraining from '@/components/chatBox/SubDocTraining';
 
 const Module = () => {
   const [selectedTab, setSelectedTab] = useState('document-filler');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
+  const [isNewDocModalOpen, setIsNewDocModalOpen] = useState(false);
+
+  const openNewDocModal = () => setIsNewDocModalOpen(true);
+  const closeNewDocModal = () => setIsNewDocModalOpen(false);
 
   return (
       <main className='flex flex-col lg:flex-row md:flex-row w-screen h-screen p-3'>
@@ -26,10 +32,16 @@ const Module = () => {
         <section className='w-1/2 h-screen'>
           <InstructionBox
             selectedTab={selectedTab}
+            openNewDocModal={openNewDocModal}
+
           />
         </section>
         </>
         )}
+        {/* NewDocModal */}
+        <NewDocModal isOpen={isNewDocModalOpen} onClose={closeNewDocModal}> 
+          <SubDocTraining />
+        </NewDocModal>
       </main>
   )
 }

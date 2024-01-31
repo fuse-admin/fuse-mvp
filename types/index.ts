@@ -23,6 +23,7 @@ export type AiChatBoxProps = {
 
 export type InstructionBoxProps = {
   selectedTab: string;
+  openNewDocModal: () => void;
 };
 
 // ====== ClientData Type

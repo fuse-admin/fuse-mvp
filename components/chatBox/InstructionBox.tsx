@@ -25,7 +25,7 @@ import ReportingCard from "./ReportingCard";
 
 
 
-export default function InstructionBox({ selectedTab }: InstructionBoxProps) {
+export default function InstructionBox({ selectedTab, openNewDocModal }: InstructionBoxProps & { openNewDocModal: () => void }){
     const [api, setApi] = useState<CarouselApi>();
 
     useEffect(() => {
@@ -56,7 +56,7 @@ export default function InstructionBox({ selectedTab }: InstructionBoxProps) {
                         <div className="flex items-center justify-center h-full">
                             <Card className="w-screen h-full">
                                 <CardContent className="h-full">
-                                    <DocumentFillerCard />
+                                    <DocumentFillerCard openNewDocModal={openNewDocModal}/>
                                 </CardContent>
                             </Card>
                         </div>
