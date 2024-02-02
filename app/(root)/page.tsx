@@ -37,7 +37,7 @@ export default function Home() {
 
   // Inline style for the fade-in effect
   const fadeInStyle = {
-    transition: 'opacity 1s ease-in-out',
+    transition: 'opacity 0s ease-in-out',
     opacity: imageLoaded ? 1 : 0, // Start at 0 opacity, transition to 1 when image is loaded
   };
 
