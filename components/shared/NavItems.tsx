@@ -18,7 +18,7 @@ const NavItems = () => {
                     key={link.route}
                     className={`${archivo.className} ${
                         isActive && 'text-yellow-500 font-bold'}
-                        flex-center p-medium-16 whitespace-nowrap`}
+                        flex-center p-medium-16 whitespace-nowrap hover:scale-150 hover:ease-in-out duration-300`}
                 >
                     <Link href={link.route}>{link.label}</Link>
                 </li>

@@ -4,7 +4,7 @@ export default function ReportingChat() {
     return (
         <main className="w-full h-screen flex flex-col gap-10">
             <div className="text-center mt-36">
-                <h1 className="text-3xl text-red-500 font-extrabold">Coming soon...</h1>
+                <h1 className="text-3xl font-extrabold">Coming soon...</h1>
             </div>
             <div className="text-center">
                 <Image 
