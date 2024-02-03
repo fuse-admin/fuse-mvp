@@ -27,7 +27,7 @@ const SubDocUploader = () => {
       ):(
       <div className='flex flex-col gap-5'>
         <h1 className={`${archivo.className} text-4xl text-center p-3 font-bold text-yellow-500`}>Sub-Doc Training</h1>
-        <p className='text-center text-xl'>Upload your subscription or custodian document below to get started</p>
+        <p className='text-center text-lg'>Upload your subscription or custodian document below to get started</p>
         <FileUploader onFileUploadComplete={handleUploadComplete} />
       </div>
       )}

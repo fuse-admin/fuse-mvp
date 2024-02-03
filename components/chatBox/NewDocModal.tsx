@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import SubDocSuccess from '../shared/SubDocSuccess';
 import SubDocUploader from './SubDocUploader';
+import SubDocTrainer from './SubDocTrainer';
 
 // Import your step components here
-const Step2Content = () => <div>Content for Step 2...</div>;
 const Step3Content = () => <div>Content for Step 3...</div>;
 
 interface NewDocModalProps {
@@ -32,7 +32,7 @@ export const NewDocModal: React.FC<NewDocModalProps> = ({ isOpen, onClose }) => 
             case 1:
                 return <SubDocUploader />;
             case 2:
-                return <Step2Content />;
+                return <SubDocTrainer />;
             case 3:
                 return <Step3Content />;
             case 4:
@@ -64,13 +64,13 @@ export const NewDocModal: React.FC<NewDocModalProps> = ({ isOpen, onClose }) => 
                 </div>
                 
                 {/* Navigation buttons at the bottom */}
-                <div className="flex justify-between pt-4 border-t">
+                <div className="flex justify-between pt-4 border-t border-yellow-500">
                     {currentStep > 1 && (
                         <button 
                             onClick={goToPreviousStep} 
                             className="px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400"
                         >
-                            Back
+                            Prev
                         </button>
                     )}
                     <div> {/* Empty div for centering the Next button with flex */}
@@ -78,7 +78,7 @@ export const NewDocModal: React.FC<NewDocModalProps> = ({ isOpen, onClose }) => 
                     {currentStep < totalSteps ? (
                         <button 
                             onClick={goToNextStep} 
-                            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+                            className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-700"
                         >
                             Next
                         </button>

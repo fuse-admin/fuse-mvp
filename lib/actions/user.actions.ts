@@ -1,7 +1,6 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-
 import { connectToDatabase } from '@/lib/database'
 import User from '@/lib/database/models/user.model'
 import { handleError } from '@/lib/utils'
@@ -18,7 +17,6 @@ export async function createUser(user: CreateUserParams) {
     handleError(error)
   }
 }
-
 
 export async function updateUser(clerkId: string, user: UpdateUserParams) {
   try {
