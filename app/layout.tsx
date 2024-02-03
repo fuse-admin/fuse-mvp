@@ -6,7 +6,6 @@ import './globals.css';
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from 'uploadthing/server';
 import { ourFileRouter } from './api/uploadthing/core';
-import "@uploadthing/react/styles.css";
 
 const merriweather = Merriweather({ weight: ['300'], subsets: ['latin'] })
 
