@@ -1,7 +1,9 @@
 import { createRouteHandler } from "uploadthing/next";
-import { subDocFileRouter } from "./core";
+import { ourFileRouter } from "./core";
+import { auth } from '@clerk/nextjs'
+
 
 // Export routes for Next App Router
 export const { GET, POST } = createRouteHandler({
-    router: subDocFileRouter,
+    router: ourFileRouter,
 });

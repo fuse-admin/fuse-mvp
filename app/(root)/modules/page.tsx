@@ -4,7 +4,7 @@ import AiChatBox from '@/components/chatBox/AiChatBox';
 import InstructionBox from '@/components/chatBox/InstructionBox';
 import Loader from '@/components/shared/Loader';
 import { NewDocModal } from '@/components/chatBox/NewDocModal';
-import SubDocTraining from '@/components/chatBox/SubDocTraining';
+import SubDocTraining from '@/components/chatBox/SubDocUploader';
 
 const Module = () => {
   const [selectedTab, setSelectedTab] = useState('document-filler');
@@ -40,7 +40,6 @@ const Module = () => {
         )}
         {/* NewDocModal */}
         <NewDocModal isOpen={isNewDocModalOpen} onClose={closeNewDocModal}> 
-          <SubDocTraining />
         </NewDocModal>
       </main>
   )

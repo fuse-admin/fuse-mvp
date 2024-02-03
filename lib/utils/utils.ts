@@ -32,3 +32,5 @@ export const generateSuccessResponse = (chatMessages: any[], successmessage: str
       }],
   };
 };
+
+export const convertFileToUrl = (file: File) => URL.createObjectURL(file)

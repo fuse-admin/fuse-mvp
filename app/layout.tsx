@@ -3,6 +3,9 @@ import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next';
 import { Merriweather } from 'next/font/google';
 import './globals.css';
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from 'uploadthing/server';
+import { ourFileRouter } from './api/uploadthing/core';
 
 const merriweather = Merriweather({ weight: ['300'], subsets: ['latin'] })
 
@@ -22,7 +25,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
     <html lang='en'>
-      <body className={merriweather.className}>{children}</body>
+      <body className={merriweather.className}>
+        <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
+        {children}
+      </body>
     </html>
     </ClerkProvider>
   );
