@@ -1,5 +1,5 @@
-import React from 'react'
-import { Archivo } from 'next/font/google'
+import React from "react"
+import { Archivo } from "next/font/google"
 import PDFViewer from '../shared/PDFViewer'
 
 const archivo = Archivo({ subsets: ["latin"] })
@@ -17,7 +17,7 @@ const SubDocTrainer = ({fileUrl}: SubDocTrainerProps) => {
     <main className='flex flex-row gap-3 w-full h-full'>
         <section className='w-1/2 flex-grow rounded-lg p-4 flex flex-col gap-3' title='Sub-doc viewer'>
           <h1 className={`${archivo.className} text-2xl text-yellow-500 font-extrabold text-center`}>Subscription Document</h1>
-          <div className='flex-grow shadow-xl'>
+          <div className='flex-grow shadow-lg rounded-2xl'>
             <PDFViewer fileUrl={fileUrl} />
           </div>
         </section>
