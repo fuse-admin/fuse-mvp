@@ -14,6 +14,14 @@ interface NewDocModalProps {
 export const NewDocModal: React.FC<NewDocModalProps> = ({ isOpen, onClose }) => {
     const [currentStep, setCurrentStep] = useState(1);
     const totalSteps = 4;
+    const [fileUrl, setFileUrl] = useState<string>('');
+    const [fileName, setFileName] = useState<string>('');
+
+    const handleFileUploadComplete = (url: string, name: string) => {
+        setFileUrl(url);
+        setFileName(name);
+        goToNextStep();
+    }
 
     const goToNextStep = () => {
         if (currentStep < totalSteps) {
@@ -30,15 +38,15 @@ export const NewDocModal: React.FC<NewDocModalProps> = ({ isOpen, onClose }) => 
     const renderStepContent = () => {
         switch (currentStep) {
             case 1:
-                return <SubDocUploader />;
+                return <SubDocUploader onFileUploadComplete={handleFileUploadComplete} />;
             case 2:
-                return <SubDocTrainer />;
+                return <SubDocTrainer fileUrl={fileUrl}/>;
             case 3:
                 return <Step3Content />;
             case 4:
                 return <SubDocSuccess />;
             default:
-                return <div><SubDocUploader /></div>; // You can modify this message as needed
+                return <div><SubDocUploader onFileUploadComplete={handleFileUploadComplete} /></div>; // You can modify this message as needed
         }
     };
 

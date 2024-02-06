@@ -45,7 +45,7 @@ type Client = {
 import { columns } from "./clientColumns"
 import { useAuth } from "@clerk/nextjs"
 import { fetchClientsForOrganization } from "@/app/api/firm-clients/clients"
-import Loader from "@/components/shared/Loader"
+import Loader from "@/components/shared/Loading"
 
 export function ClientDataTable() {
     const [isLoading, setIsLoading] = useState(false)

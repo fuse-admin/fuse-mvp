@@ -1,7 +1,7 @@
 "use client";
 import { Archivo } from 'next/font/google';
 import { useState } from 'react';
-import Loader from '../shared/Loader';
+import Loader from '../shared/Loading';
 
 const archivo = Archivo({ subsets: ["latin"] })
 

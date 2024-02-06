@@ -5,13 +5,18 @@ import Image from 'next/image';
 
 const archivo = Archivo({ subsets: ["latin"] })
 
-const SubDocUploader = () => {
+type SubDocUploaderProps = {
+  onFileUploadComplete: (url: string, name: string) => void;
+}
+
+const SubDocUploader = ({ onFileUploadComplete }: SubDocUploaderProps) => {
   const [fileUrl, setFileUrl] = useState<string>('');
   const [fileName, setFileName] = useState<string>('');
 
   const handleUploadComplete = (url: string,name: string) => {
     setFileUrl(url);
     setFileName(name);
+    onFileUploadComplete(url, name);
   };
 
   return (
