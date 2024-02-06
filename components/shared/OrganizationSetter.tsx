@@ -1,5 +1,5 @@
 import { useOrganizationList } from "@clerk/nextjs";
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
 const OrganizationSetter = () => {
   const { isLoaded, setActive, userMemberships } = useOrganizationList({

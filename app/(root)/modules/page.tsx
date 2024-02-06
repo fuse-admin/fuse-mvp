@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import AiChatBox from '@/components/chatBox/AiChatBox';
 import InstructionBox from '@/components/chatBox/InstructionBox';
-import Loader from '@/components/shared/Loader';
+import Loader from '@/components/shared/Loading';
 import { NewDocModal } from '@/components/chatBox/NewDocModal';
 import SubDocTraining from '@/components/chatBox/SubDocUploader';
 
