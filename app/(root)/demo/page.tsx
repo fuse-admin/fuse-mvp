@@ -1,5 +1,5 @@
-import { Archivo } from 'next/font/google'
-import React from 'react'
+import { Archivo } from "next/font/google"
+import React from "react"
 
 const archivo = Archivo({ subsets: ["latin"] })
 

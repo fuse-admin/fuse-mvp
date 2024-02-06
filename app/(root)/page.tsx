@@ -1,8 +1,8 @@
 "use client"
 import Typed from 'typed.js';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image"
-import { Archivo } from 'next/font/google';
+import { Archivo } from "next/font/google"
 import { Button } from '@/components/ui/button';
 
 const archivo = Archivo({ subsets: ["latin"] })
@@ -52,6 +52,14 @@ export default function Home() {
             className={archivo.className} 
             ref={el} />
           </div>
+          <div className='mt-5'>
+            <Button 
+              className="ml-5 mt-20 hover:scale-150 hover:bg-emerald-500 hover:ease-in-out duration-300" variant="outline">
+              <a href='/demo'>
+                Learn More
+              </a>
+            </Button>
+          </div>
         </div>
         {/* Image container */}
         <div className='w-full md:w-1/2 flex md:justify-end px-0 md:px-12' style={fadeInStyle}>
@@ -69,7 +77,7 @@ export default function Home() {
             }} />
         </div>
       </section>
-      {/* Features section */}
+      {/* Features section 
       <section className="h-screen relative flex flex-col p-3 gap-3">
         <h1 className={`${archivo.className} text-4xl p-2 text-yellow-500`}>The current alternatives operations process is plagued with issues...</h1>
         <ul className='w-full items-center justify-between flex flex-col p-3 gap-5 md:flex-row'>
@@ -113,6 +121,7 @@ export default function Home() {
           </a>
         </Button>
       </section>
+      */}
     </main>
   );
 }

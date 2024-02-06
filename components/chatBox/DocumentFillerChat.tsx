@@ -1,10 +1,10 @@
 'use client';
-import { useChat } from 'ai/react';
-import { use, useEffect, useRef } from 'react';
+import { useChat } from "ai/react";
+import { use, useEffect, useRef } from "react";
 import { FunctionCallHandler, nanoid } from 'ai';
 import { checkClientInList } from '@/app/api/firm-clients/clients';
 import { generateErrorResponse, generateSuccessResponse } from '@/lib/utils';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from "react-markdown";
 import { useAuth, auth, currentUser } from '@clerk/nextjs';
 import OrganizationSetter from '../shared/OrganizationSetter';
 import { GenericClientData } from '@/types';
@@ -63,7 +63,7 @@ export default function DocumentFillerChat() {
                 //chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} found in client database! Filling W-9...` });
                 // Fill W-9 form
                 await fillW9(clientData);
-                return generateSuccessResponse(chatMessages, `Your W-9 form for ${formattedClientName} has been filled! Please check your downloads folder for the filled form.`);
+                return generateSuccessResponse(chatMessages, `W-9 form filled! Check your downloads folder for the filled form.`);
             } else {
                 chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` Cannot find the organization you are a part of. Please confirm your organization on the Team Settings page on the Dashboard.` });
                 return;

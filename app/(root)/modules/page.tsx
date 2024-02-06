@@ -1,10 +1,9 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState } from "react"
 import AiChatBox from '@/components/chatBox/AiChatBox';
 import InstructionBox from '@/components/chatBox/InstructionBox';
-import Loader from '@/components/shared/Loading';
 import { NewDocModal } from '@/components/chatBox/NewDocModal';
-import SubDocTraining from '@/components/chatBox/SubDocUploader';
+import Loading from "@/components/shared/Loading";
 
 const Module = () => {
   const [selectedTab, setSelectedTab] = useState('document-filler');
@@ -17,7 +16,7 @@ const Module = () => {
   return (
       <main className='flex flex-col lg:flex-row md:flex-row w-screen h-screen p-3'>
         {isLoading ? (
-          <Loader />
+          <Loading />
         ) : (
           <>
         {/* Center AiChatBox within this section */}

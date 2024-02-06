@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import SubDocSuccess from '../shared/SubDocSuccess';
+import React, { useState } from "react";
 import SubDocUploader from './SubDocUploader';
 import SubDocTrainer from './SubDocTrainer';
 
@@ -44,7 +43,7 @@ export const NewDocModal: React.FC<NewDocModalProps> = ({ isOpen, onClose }) => 
             case 3:
                 return <Step3Content />;
             case 4:
-                return <SubDocSuccess />;
+                return <Step3Content />;
             default:
                 return <div><SubDocUploader onFileUploadComplete={handleFileUploadComplete} /></div>; // You can modify this message as needed
         }
