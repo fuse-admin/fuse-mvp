@@ -14,26 +14,28 @@ const Module = () => {
   const closeNewDocModal = () => setIsNewDocModalOpen(false);
 
   return (
-      <main className='flex flex-col lg:flex-row md:flex-row w-screen h-screen p-3'>
+      <main className='grid grid-cols-1 md:grid-cols-2 h-screen'>
         {isLoading ? (
           <Loading />
         ) : (
           <>
-        {/* Center AiChatBox within this section */}
-        <section className='w-1/2 flex justify-center items-center'>
-          <div className="w-full max-w-sm"> {/* Adjust max-width as needed */}
+        {/* ChatBox Section */}
+        <section className='w-screen h-screen ml-5'>
+          <div className="w-full"> 
             <AiChatBox
               selectedTab={selectedTab}
               setSelectedTab={setSelectedTab}
             />
           </div>
         </section>
-        <section className='w-1/2 h-screen'>
+        <section className=''>
+          <div className="w-full">
           <InstructionBox
             selectedTab={selectedTab}
             openNewDocModal={openNewDocModal}
 
           />
+          </div>
         </section>
         </>
         )}

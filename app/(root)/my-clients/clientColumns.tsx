@@ -49,6 +49,21 @@ export const columns: ColumnDef<Client>[] = [
     cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
 },
 {
+    accessorKey: "city_state_zip",
+    header: ({ column }) => {
+    return (
+        <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+        City, State, Zip
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+    )
+    },
+    cell: ({ row }) => <div className="lowercase">{row.getValue("city_state_zip")}</div>,
+},
+{
     accessorKey: "portfolio_value",
     header: ({ column }) => (
     <Button

@@ -39,7 +39,7 @@ export const NewDocModal: React.FC<NewDocModalProps> = ({ isOpen, onClose }) => 
             case 1:
                 return <SubDocUploader onFileUploadComplete={handleFileUploadComplete} />;
             case 2:
-                return <SubDocTrainer fileUrl={fileUrl}/>;
+                return <SubDocTrainer fileUrl={fileUrl} trainingFileUrl={fileUrl}/>;
             case 3:
                 return <Step3Content />;
             case 4:

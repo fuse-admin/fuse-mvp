@@ -15,7 +15,7 @@ export default function Home() {
   useEffect(() => {
     const options = {
       strings: [
-        'The future of alts operations is now',
+        'Future of alts operations is now',
         'Take back your time',
         'Connect your processes with Fuse', 
       ],
@@ -37,24 +37,26 @@ export default function Home() {
 
   // Inline style for the fade-in effect
   const fadeInStyle = {
-    transition: 'opacity 0s ease-in-out',
+    transition: 'opacity 0.5s ease-in-out',
     opacity: imageLoaded ? 1 : 0, // Start at 0 opacity, transition to 1 when image is loaded
   };
 
   return (
-    <main className="flex flex-col overflow-auto md:overflow-hidden">
+    <main className="flex flex-col overflow-hidden">
       {/* Hero section */}
-      <section className="flex flex-col md:flex-row items-center justify-center" id="hero" style={{ height: '100vh' }}>
+      <section 
+        className="flex flex-row items-center justify-center mt-0" 
+        style={{ height: '80vh' }}>
         {/* Text container with a fixed height to prevent layout shift */}
-        <div className='w-full md:w-1/2 md:px-12 text-center md:text-left sm: mb-0 sm: mt-10'>
-          <div className='text-6xl mt-10 mb-0 p-4 text-yellow-500 font-bold md:text-8xl' style={{ height: '200px' }}>
+        <div className='w-full text-left mt-0 mb-0'>
+          <div className='text-5xl p-4 text-yellow-500 font-bold flex justify-start items-left' style={{ height: '200px' }}>
             <span 
             className={archivo.className} 
             ref={el} />
           </div>
-          <div className='mt-5'>
+          <div>
             <Button 
-              className="ml-5 mt-20 hover:scale-150 hover:bg-emerald-500 hover:ease-in-out duration-300" variant="outline">
+              className="ml-5 hover:scale-125 hover:bg-yellow-500/100 hover:ease-in-out duration-300" variant="outline">
               <a href='/demo'>
                 Learn More
               </a>
@@ -62,19 +64,14 @@ export default function Home() {
           </div>
         </div>
         {/* Image container */}
-        <div className='w-full md:w-1/2 flex md:justify-end px-0 md:px-12' style={fadeInStyle}>
+        <div className='' style={fadeInStyle}>
           <Image
             src="/assets/images/future.svg"
             width={1024}
             height={1024}
             alt="Future"
-            className='dark:hue-rotate-180'
             loading='eager'
-            onLoad={() => setImageLoaded(true)}
-            style={{
-              maxWidth: "100%",
-              height: "auto"
-            }} />
+            onLoad={() => setImageLoaded(true)}/>
         </div>
       </section>
       {/* Features section 

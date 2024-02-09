@@ -95,38 +95,41 @@ export default function DocumentFillerChat() {
     }, [messages]);
  
     return (
-    <div className="flex flex-col w-full h-full p-3">
-        <div className='absolute top-0 left-0 right-0 h-10 bg-gradient-to-b from-white to-transparent'></div>
-        {/* Style the chat output messages */}
-        <section ref={messagesContainerRef} className="flex-grow overflow-auto p-6 space-y-2 pt-10 mb-10 max-h-[600px]">
-    {filteredMessages.map((m) => (
-        <div className={`text-xl p-3 ${m.role === 'user' ? 'font-extrabold' : 'font-extralight text-gray-500 dark:text-gray-400'}`} key={m.id}>
-            {m.role === 'user' ? (
-                <p className='font-semibold'>You: {m.content}</p>
-            ) : (
-                <p>
-                    AI: 
-                    {m.content.includes('Writing and Editing Assistance') ? (
-                        <ReactMarkdown>{m.content}</ReactMarkdown>
-                    ) : (
-                        m.content.split('\n').map((line, index) => (
+    <div className="grid grid-rows-2">
+        <section ref={messagesContainerRef} className="flex-grow overflow-auto mb-10 max-h-[450px]">
+        {filteredMessages.map((m) => (
+            <div className={`text-md p-3 ${m.role === 'user' ? 'font-extrabold' : 'text-gray-500'}`} key={m.id}>
+                {m.role === 'user' ? (
+                    <p className='font-semibold'>You: {m.content}</p>
+                ) : (
+                    <div>
+                    AI: {m.content.split('\n').map((line, index) => {
+                        // Check if line contains Markdown indicators like "**" or "##"
+                        const hasMarkdown = /(\*\*|##)/.test(line);
+                        return (
                             <span key={index}>
-                                {line}
-                                <br />
+                                {hasMarkdown ? (
+                                    <ReactMarkdown children={line} />
+                                ) : (
+                                    <>
+                                        {line}
+                                        <br />
+                                    </>
+                                )}
                             </span>
-                        ))
-                    )}
-                </p>
+                        );
+                    })}
+                </div>
             )}
         </div>
     ))}
 </section>
-        {/* Style the chat input */}
+        {/* Chat Input */}
         <div className="p-4">
-            <div className="absolute bottom-0 w-1/2">
+            <div className="absolute bottom-1 w-8/12">
             <form onSubmit={handleSubmit}>
                 <input
-                    className="w-3/5 border-none bg-transparent p-2 text-lg font-bold placeholder-gray-400 focus:outline-none"
+                    className="w-3/4 border-none bg-transparent p-2 text-md font-bold placeholder-gray-400 focus:outline-none"
                     value={input}
                     placeholder="Ask a question or put your request here..."
                     onChange={handleInputChange}
