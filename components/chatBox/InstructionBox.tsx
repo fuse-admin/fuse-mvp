@@ -48,9 +48,9 @@ export default function InstructionBox({ selectedTab, openNewDocModal }: Instruc
     }, [api, selectedTab]);
 
     return (
-        <main className="w-4/5 h-full mt-[-20px]">
-            <Carousel setApi={setApi} className="h-full">
-                <CarouselContent className="h-full">
+        <main className="w-4/5 h-screen">
+            <Carousel setApi={setApi} className="h-screen">
+                <CarouselContent className="h-screen">
                     {/* Document Filler */}
                     <CarouselItem className="w-screen h-screen">
                         <div className="flex items-center justify-center h-full">
