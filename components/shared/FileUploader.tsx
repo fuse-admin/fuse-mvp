@@ -1,5 +1,4 @@
 import { UploadButton } from "@/lib/utils/uploadthing";
-import { on } from "events";
  
 type FileUploaderProps = {
   onFileUploadComplete: (url: string, name:string) => void;

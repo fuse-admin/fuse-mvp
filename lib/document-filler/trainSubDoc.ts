@@ -1,48 +1,42 @@
-import { PDFDocument } from 'pdf-lib';
+import { PDFDocument, PDFTextField } from 'pdf-lib';
+import { uploadPdfToUploadThing } from './uploadPdfToUploadThing';
 
 export async function trainSubDoc(fileUrl: string) {
     try {
         console.log(`Starting to load the PDF from URL: ${fileUrl}`);
-
+        
+        // Fetch the PDF from the URL
         const response = await fetch(fileUrl);
         if (!response.ok) throw new Error(`Failed to fetch the PDF from URL: ${fileUrl}`);
         const pdfBlob = await response.blob();
 
-        //Convert the blob to ArrayBuffer
+        //Convert the blob to ArrayBuffer(needed for PDFDocument.load() method)
         const arrayBuffer = await pdfBlob.arrayBuffer();
 
+        // Load the PDF
         const pdfDoc = await PDFDocument.load(arrayBuffer);
         console.log(`PDF loaded successfully`);
 
+        // Get the form and fields
         const form = pdfDoc.getForm();
         const fields = form.getFields();
         fields.forEach(field => {
-            console.log(`Field found with name: ${field.getName()}`);
-        });
-
-        // Assuming w9Mapping and clientData are defined and available
-        // If not, you need to define them or adjust the logic accordingly
-        /*
-        Object.entries(w9Mapping).forEach(([pdfFieldName, clientDataField]) => {
-            try {
-                const field = form.getField(pdfFieldName);
-                if (field instanceof PDFTextField) {
-                    const value = clientData[clientDataField] || '';
-                    field.setText(value);
+            //Check if the field is a text field
+            if (field instanceof PDFTextField) {
+                let textToSet = field.getName();
+                // If there's a maxLength, truncate the text to fit within it
+                if (field.getMaxLength()){
+                    textToSet = textToSet.substring(0, field.getMaxLength());
                 }
-            } catch (error) {
-                console.error(`Error processing field ${pdfFieldName}:`, error);
+                field.setText(textToSet);
             }
         });
-        */
 
-        console.log(`Starting to save the modified PDF`);
-        const pdfBytes = await pdfDoc.save();
+        const modifiedPdfBytes = await pdfDoc.save();
         console.log(`Modified PDF saved successfully`);
-
-        return pdfBytes;
+        return modifiedPdfBytes;
     } catch (error) {
         console.error(`Error in trainSubDoc with URL ${fileUrl}:`, error);
-        throw new Error(`Failed to load PDF: ${error}`) // Rethrow the error after logging it
+        throw new Error(`Failed to load PDF: ${error}`)
     }
 }
