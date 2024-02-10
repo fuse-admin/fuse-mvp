@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { FileUploader } from '../shared/FileUploader'
 import { Archivo } from 'next/font/google';
-import Image from 'next/image';
+import Image from 'next/image'
+
 
 const archivo = Archivo({ subsets: ["latin"] })
 

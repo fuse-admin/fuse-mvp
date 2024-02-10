@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import SubDocUploader from './SubDocUploader';
 import SubDocTrainer from './SubDocTrainer';
 
@@ -39,7 +39,7 @@ export const NewDocModal: React.FC<NewDocModalProps> = ({ isOpen, onClose }) => 
             case 1:
                 return <SubDocUploader onFileUploadComplete={handleFileUploadComplete} />;
             case 2:
-                return <SubDocTrainer fileUrl={fileUrl} trainingFileUrl={fileUrl}/>;
+                return <SubDocTrainer fileUrl={fileUrl}/>;
             case 3:
                 return <Step3Content />;
             case 4:
@@ -53,7 +53,7 @@ export const NewDocModal: React.FC<NewDocModalProps> = ({ isOpen, onClose }) => 
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center h-screen overflow-hidden">
-            <div className="relative bg-white rounded-xl shadow-2xl w-3/4 h-5/6 p-4 flex flex-col">
+            <div className="relative bg-white rounded-xl shadow-2xl w-3/4 max-h-[80vh] overflow-y-auto p-4 flex flex-col">
                 
                 {/* Close button at the top right */}
                 <div className="self-end">

@@ -96,7 +96,7 @@ export default function DocumentFillerChat() {
  
     return (
     <div className="grid grid-rows-2">
-        <section ref={messagesContainerRef} className="flex-grow overflow-auto mb-10 max-h-[450px]">
+        <section ref={messagesContainerRef} className="flex-grow overflow-auto mb-10 max-h-[580px]">
         {filteredMessages.map((m) => (
             <div className={`text-md p-3 ${m.role === 'user' ? 'font-extrabold' : 'text-gray-500'}`} key={m.id}>
                 {m.role === 'user' ? (
@@ -129,13 +129,13 @@ export default function DocumentFillerChat() {
             <div className="absolute bottom-1 w-8/12">
             <form onSubmit={handleSubmit}>
                 <input
-                    className="w-3/4 border-none bg-transparent p-2 text-md font-bold placeholder-gray-400 focus:outline-none"
+                    className="w-3/6 border-none bg-transparent p-2 text-md font-bold placeholder-gray-400 focus:outline-none"
                     value={input}
                     placeholder="Ask a question or put your request here..."
                     onChange={handleInputChange}
                 />
             </form>
-            <div className="absolute bottom-0 w-3/5 border-b-2 border-gray-400"></div>
+            <div className="absolute bottom-0 w-3/6 border-b-2 border-gray-400"></div>
             </div>
         </div>
     </div>

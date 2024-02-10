@@ -28,7 +28,7 @@ const Module = () => {
             />
           </div>
         </section>
-        <section className=''>
+        <section>
           <div className="w-full">
           <InstructionBox
             selectedTab={selectedTab}
