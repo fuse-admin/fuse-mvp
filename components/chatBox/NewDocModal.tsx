@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import SubDocUploader from './SubDocUploader';
 import SubDocTrainer from './SubDocTrainer';
 import { useAuth } from '@clerk/nextjs';
-
-// Import your step components here
-const Step3Content = () => <div>Content for Step 3...</div>;
+import { useToast } from "@/components/ui/use-toast"
+import DocumentDataSuccess from './DocumentDataSuccess';
 
 interface NewDocModalProps {
     isOpen: boolean;
@@ -19,6 +18,7 @@ export const NewDocModal: React.FC<NewDocModalProps> = ({ isOpen, onClose }) => 
     const [fileUrl, setFileUrl] = useState<string>('');
     const [fileName, setFileName] = useState<string>('');
     const { orgId } = useAuth();
+    const { toast } = useToast();
 
     const handleFileUploadComplete = (url: string, name: string) => {
         setFileUrl(url);
@@ -27,6 +27,10 @@ export const NewDocModal: React.FC<NewDocModalProps> = ({ isOpen, onClose }) => 
     }
 
     const handleTrainingSubmission = async (selectedData: Record<string, string | null>) => {
+        toast({
+            title: "Training data submitted",
+            description: "The training data has been submitted. Please wait...",
+        });
         const { "Fund Name": fundName, ...dynamicfields } = selectedData;
         const payload = {
             fundName,
@@ -45,11 +49,11 @@ export const NewDocModal: React.FC<NewDocModalProps> = ({ isOpen, onClose }) => 
             });
             if (!response.ok) throw new Error('Failed to submit the data');
             console.log('Data submitted successfully');
+            goToNextStep();
         } catch (error) {
             console.error('Failed to submit the data', error);
         }
     };
-
 
     const goToNextStep = () => {
         if (currentStep < totalSteps) {
@@ -70,7 +74,7 @@ export const NewDocModal: React.FC<NewDocModalProps> = ({ isOpen, onClose }) => 
             case 2:
                 return <SubDocTrainer fileUrl={fileUrl} onSubmit={handleTrainingSubmission}/>;
             case 3:
-                return <Step3Content />;
+                return <DocumentDataSuccess />;
             default:
                 return <div><SubDocUploader onFileUploadComplete={handleFileUploadComplete} /></div>; // You can modify this message as needed
         }
