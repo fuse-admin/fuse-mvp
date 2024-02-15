@@ -27,10 +27,12 @@ export const NewDocModal: React.FC<NewDocModalProps> = ({ isOpen, onClose }) => 
     }
 
     const handleTrainingSubmission = async (selectedData: Record<string, string | null>) => {
+        const { "Fund Name": fundName, ...dynamicfields } = selectedData;
         const payload = {
-            ...selectedData,
-            fileUrl: fileUrl,
-            orgId: orgId,
+            fundName,
+            fileUrl,
+            orgId,
+            dynamicfields,
         };
 
         try {

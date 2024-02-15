@@ -1,5 +1,4 @@
 import type { ChatCompletionCreateParams } from 'openai/resources/chat/index'
-import { checkClientInList } from '../firm-clients/clients';
 
 export const functions: ChatCompletionCreateParams.Function[] = [
     {
