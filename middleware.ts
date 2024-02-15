@@ -11,7 +11,8 @@ export default authMiddleware({
   ],
   ignoredRoutes: [
     '/api/webhook/clerk',
-    '/api/uploadthing'
+    '/api/uploadthing',
+    '/api/submitTrainingData',
   ]
 });
  
