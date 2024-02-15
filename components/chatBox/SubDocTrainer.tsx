@@ -3,7 +3,7 @@ import { Archivo } from 'next/font/google'
 import PDFViewer from '../shared/PDFViewer'
 import FieldNameSelector from './FieldNameSelector'
 import { PDFDocument } from 'pdf-lib'
-import { Input } from '../ui/input'
+import Loading from '../shared/Loading'
 
 const archivo = Archivo({ subsets: ["latin"] })
 
@@ -42,7 +42,6 @@ async function processUploadedSubDoc(fileUrl: string) {
   }
 }
 
-
 const SubDocTrainer = ({fileUrl, onSubmit}: SubDocTrainerProps) => {
   const [processedSubDocUrl, setProcessedSubDocUrl] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -60,16 +59,15 @@ const SubDocTrainer = ({fileUrl, onSubmit}: SubDocTrainerProps) => {
     }
   }, [fileUrl]);
 
-
   return (
     <main className='grid grid-cols-2 w-full h-full gap-3'>
-        <section className='w-full flex flex-col gap-3' title='Sub-doc viewer'>
+        <section className='w-full flex flex-col gap-3'>
           <h1 className={`${archivo.className} text-2xl text-yellow-500 font-extrabold text-center`}>Document</h1>
           <div className='mb-4'>
-            {processedSubDocUrl ? <PDFViewer fileUrl={processedSubDocUrl} /> : <p>Loading PDF...</p>}
+            {processedSubDocUrl ? <PDFViewer fileUrl={processedSubDocUrl} /> : <div className='flex items-center justify-center min-h-screen'><Loading /></div>}
           </div>
         </section>
-        <section className='w-full flex flex-col gap-3' title='Field-name dict creator'>
+        <section className='w-full flex flex-col gap-3'>
           <h1 className={`${archivo.className} text-2xl text-yellow-500 font-extrabold text-center`}>Field Name Selector</h1>
           <FieldNameSelector fieldNames = {fieldNames} onSubmit={onSubmit} />
         </section>
