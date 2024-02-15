@@ -9,6 +9,7 @@ const archivo = Archivo({ subsets: ["latin"] })
 
 type SubDocTrainerProps = {
   fileUrl: string,
+  onSubmit: (selectedData: Record<string, string | null>) => void;
 }
 
 async function processUploadedSubDoc(fileUrl: string) {
@@ -42,7 +43,7 @@ async function processUploadedSubDoc(fileUrl: string) {
 }
 
 
-const SubDocTrainer = ({fileUrl}: SubDocTrainerProps) => {
+const SubDocTrainer = ({fileUrl, onSubmit}: SubDocTrainerProps) => {
   const [processedSubDocUrl, setProcessedSubDocUrl] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [fieldNames, setFieldNames] = useState<string[]>([]);
@@ -70,11 +71,7 @@ const SubDocTrainer = ({fileUrl}: SubDocTrainerProps) => {
         </section>
         <section className='w-full flex flex-col gap-3' title='Field-name dict creator'>
           <h1 className={`${archivo.className} text-2xl text-yellow-500 font-extrabold text-center`}>Field Name Selector</h1>
-          <div className='flex flex-cols gap-3'>
-            <h3 className={`${archivo.className} font-extrabold text-yellow-500`}>Fund Name: </h3>
-            <Input type='text' placeholder='Enter fund name' />
-          </div>
-          <FieldNameSelector fieldNames = {fieldNames} />
+          <FieldNameSelector fieldNames = {fieldNames} onSubmit={onSubmit} />
         </section>
     </main>
   )

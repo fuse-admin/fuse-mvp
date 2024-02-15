@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SubDocUploader from './SubDocUploader';
 import SubDocTrainer from './SubDocTrainer';
+import { useAuth } from '@clerk/nextjs';
 
 // Import your step components here
 const Step3Content = () => <div>Content for Step 3...</div>;
@@ -10,17 +11,43 @@ interface NewDocModalProps {
     onClose: () => void;
 }
 
+
+
 export const NewDocModal: React.FC<NewDocModalProps> = ({ isOpen, onClose }) => {
     const [currentStep, setCurrentStep] = useState(1);
     const totalSteps = 4;
     const [fileUrl, setFileUrl] = useState<string>('');
     const [fileName, setFileName] = useState<string>('');
+    const { orgId } = useAuth();
 
     const handleFileUploadComplete = (url: string, name: string) => {
         setFileUrl(url);
         setFileName(name);
         goToNextStep();
     }
+
+    const handleTrainingSubmission = async (selectedData: Record<string, string | null>) => {
+        const payload = {
+            ...selectedData,
+            fileUrl: fileUrl,
+            orgId: orgId,
+        };
+
+        try {
+            const response = await fetch('/api/submitTrainingData', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+            if (!response.ok) throw new Error('Failed to submit the data');
+            console.log('Data submitted successfully');
+        } catch (error) {
+            console.error('Failed to submit the data', error);
+        }
+    };
+
 
     const goToNextStep = () => {
         if (currentStep < totalSteps) {
@@ -39,10 +66,8 @@ export const NewDocModal: React.FC<NewDocModalProps> = ({ isOpen, onClose }) => 
             case 1:
                 return <SubDocUploader onFileUploadComplete={handleFileUploadComplete} />;
             case 2:
-                return <SubDocTrainer fileUrl={fileUrl}/>;
+                return <SubDocTrainer fileUrl={fileUrl} onSubmit={handleTrainingSubmission}/>;
             case 3:
-                return <Step3Content />;
-            case 4:
                 return <Step3Content />;
             default:
                 return <div><SubDocUploader onFileUploadComplete={handleFileUploadComplete} /></div>; // You can modify this message as needed
