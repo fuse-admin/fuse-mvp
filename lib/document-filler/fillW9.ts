@@ -5,7 +5,7 @@ import w9Mapping from './mappings/w9_mapping.json';
 
 export async function fillW9(clientData: any) {
     // Load the W-9 PDF
-    const pdfPath = path.join(process.cwd(), '/global-documents/fw9.pdf');
+    const pdfPath = path.resolve(process.cwd(), 'public', 'global-documents', 'fw9.pdf');
     const existingPdfBytes = fs.readFileSync(pdfPath);
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
 
