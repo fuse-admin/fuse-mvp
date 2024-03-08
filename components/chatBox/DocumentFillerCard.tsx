@@ -25,13 +25,18 @@ export default function DocumentFillerCard({ openNewDocModal }: { openNewDocModa
             <section className='flex flex-col justify-center items-center mt-10 gap-5'>
                 <Button
                     onClick={openNewDocModal} 
-                    className='w-1/2 h-10 text-lg font-bold text-black bg-yellow-500 hover:bg-yellow-600 rounded-2xl shadow-lg'>
+                    className='w-1/2 h-10 text-lg font-bold text-black bg-yellow-500 hover:bg-yellow-600 rounded-2xl shadow-lg hover:scale-110 ease-in-out duration-300'>
                         Train a new sub-doc
                 </Button>
                 <Button
                     onClick={openModal} 
-                    className='w-1/2 h-10 text-lg font-bold text-black bg-yellow-500 hover:bg-yellow-600 rounded-2xl shadow-lg'>
+                    className='w-1/2 h-10 text-lg font-bold text-black bg-yellow-500 hover:bg-yellow-600 rounded-2xl shadow-lg hover:scale-110 ease-in-out duration-300'>
                         View my clients
+                </Button>
+                <Button
+                    onClick={openModal} 
+                    className='w-1/2 h-10 text-lg font-bold text-black bg-yellow-500 hover:bg-yellow-600 rounded-2xl shadow-lg hover:scale-110 ease-in-out duration-300'>
+                        See all trained sub-docs
                 </Button>
             </section>
             <ClientModal isOpen={isModalOpen} onClose={closeModal}>
