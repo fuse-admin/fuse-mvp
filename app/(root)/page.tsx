@@ -66,7 +66,7 @@ export default function Home() {
         {/* Image container */}
         <div className='' style={fadeInStyle}>
           <Image
-            src="/assets/images/future.webp"
+            src="/assets/images/future.svg"
             width={1024}
             height={1024}
             alt="Future"

@@ -13,7 +13,6 @@ export default authMiddleware({
     '/api/webhook/clerk',
     '/api/uploadthing',
     '/api/submitTrainingData',
-    '/api/processSubDoc',
   ]
 });
  
