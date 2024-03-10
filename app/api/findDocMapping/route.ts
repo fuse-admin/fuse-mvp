@@ -35,7 +35,7 @@ export async function POST(req: NextRequest){
     // Use OpenAI to find the best match
     const openai = new OpenAI();
     const gptResponse = await openai.chat.completions.create({
-        model: "gpt-4-0125-preview",
+        model: "gpt-3.5-turbo",
         messages: [
             {
                 role: "system",

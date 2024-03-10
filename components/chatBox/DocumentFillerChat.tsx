@@ -3,12 +3,11 @@ import { useChat } from "ai/react";
 import { useEffect, useRef } from "react";
 import { FunctionCallHandler, nanoid } from 'ai';
 import { checkClientInList } from '@/app/api/firm-clients/clients';
-import { generateErrorResponse, generateSuccessResponse } from '@/lib/utils';
+import { generateSuccessResponse } from '@/lib/utils';
 import ReactMarkdown from "react-markdown";
 import { useAuth } from '@clerk/nextjs';
 import OrganizationSetter from '../shared/OrganizationSetter';
-import { GenericClientData } from '@/types';
-import { error } from "console";
+import { GenericClientData, TrainingData, DynamicFields } from '@/types';
 
 const fillW9 = async (clientData: GenericClientData): Promise<string | null> => {
     fetch('/api/fillW9', {
@@ -31,10 +30,9 @@ const fillW9 = async (clientData: GenericClientData): Promise<string | null> => 
     return null;
 }
 
-const findDocMapping = async (fundName: string, orgId: string): Promise<string | null> => {
+const findDocMapping = async (fundName: string, orgId: string): Promise<TrainingData | null> => {
     console.log('Finding document mapping for fund:', fundName);
 
-    try {
         const response = await fetch('/api/findDocMapping', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -45,14 +43,32 @@ const findDocMapping = async (fundName: string, orgId: string): Promise<string |
 
         if (response.ok) {
             console.log('Document mapping found:', responseData);
+            console.log('Type of response data:', typeof responseData);
             return responseData;
         } else {
             throw new Error('Error finding document training for this fund.');
         }
-    } catch (error) {
-        console.error('Error finding document mapping:', error);
-        return null;
-    }
+}
+
+const fillSubDoc = async (clientData: GenericClientData, docMappingData: TrainingData): Promise<string | null> => {
+    fetch('/api/fillSubDoc', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({clientData, docMappingData})
+    })
+    .then(response => response.blob())
+    .then(blob => {
+        // Create a link to download the filled PDF
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'filled_subscription_document.pdf';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+    })
+    .catch(error => console.error('Error in filling subscription document:', error));
+    return null;
 }
 
 export default function DocumentFillerChat() {
@@ -116,16 +132,15 @@ export default function DocumentFillerChat() {
                     chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} not found in client database. Please check the client list to ensure.` });
                     return;
                 }
-                chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} found in client database! Filling the subscription document for ${formattedFundName}...` });
+                chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} found in client database! Filling the subscription document...` });
                 const docMappingData = await findDocMapping(fundName, orgId);
-                console.log('Doc mapping data (chatbox):', docMappingData);
                 if (!docMappingData) {
                     chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: `There was an error finding ${formattedFundName} in the database. Please check the Fund List to ensure there is training data for this fund.` });
                     return;
                 }
                 // Fill subscription documents
-                //await fillSubscriptionDocuments(clientData, fundName);
-                return;
+                await fillSubDoc(clientData, docMappingData);
+                return generateSuccessResponse(chatMessages, `Subscription document for ${docMappingData.fundName} filled! Check your downloads folder for the filled document.`);
             } else {
                 chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` Cannot find the organization you are a part of. Please confirm your organization on the Team Settings page on the Dashboard.` });
                 return;

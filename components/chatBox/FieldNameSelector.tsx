@@ -53,6 +53,9 @@ let groupedClientDataOptions = [
   {
     label: "Personal Information",
     options: [
+      { label: 'Date of Birth', value: 'date of birth' },
+      { label: 'Email', value: 'email' },
+      { label: 'Phone Number', value: 'phone number' },
       { label: 'Full SSN', value: 'full ssn' },
       { label: 'SSN First 3 Digits', value: 'ssn first 3 digits' },
       { label: 'SSN Middle 2 Digits', value: 'ssn middle 2 digits' },

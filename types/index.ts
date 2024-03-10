@@ -38,3 +38,15 @@ export type GenericClientData = {
   telephone: string;
   portfolio_value: number;
 };
+
+// ====== Training Data Type
+export type DynamicFields = {
+  [key: string]: any; // Consider specifying a more detailed type if you know the structure of your dynamic fields
+};
+
+export type TrainingData = {
+  fundName: string;
+  fileUrl: string;
+  orgId: string;
+  dynamicfields: DynamicFields;
+};
