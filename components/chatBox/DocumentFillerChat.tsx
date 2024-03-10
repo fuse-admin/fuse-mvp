@@ -8,6 +8,7 @@ import ReactMarkdown from "react-markdown";
 import { useAuth } from '@clerk/nextjs';
 import OrganizationSetter from '../shared/OrganizationSetter';
 import { GenericClientData } from '@/types';
+import { error } from "console";
 
 const fillW9 = async (clientData: GenericClientData): Promise<string | null> => {
     fetch('/api/fillW9', {
@@ -30,18 +31,26 @@ const fillW9 = async (clientData: GenericClientData): Promise<string | null> => 
     return null;
 }
 
-const findDocMapping = async (fundName: string): Promise<string | null> => {
+const findDocMapping = async (fundName: string, orgId: string): Promise<string | null> => {
     console.log('Finding document mapping for fund:', fundName);
-    const response = await fetch('/api/findDocMapping', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({fundName})
-    });
 
-    if (response.ok) {
-        return await response.json();
-    } else {
-        console.error('Error in finding document mapping:', response);
+    try {
+        const response = await fetch('/api/findDocMapping', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({fundName: fundName, orgId: orgId})
+        });
+
+        const responseData = await response.json();
+
+        if (response.ok) {
+            console.log('Document mapping found:', responseData);
+            return responseData;
+        } else {
+            throw new Error('Error finding document training for this fund.');
+        }
+    } catch (error) {
+        console.error('Error finding document mapping:', error);
         return null;
     }
 }
@@ -72,9 +81,8 @@ export default function DocumentFillerChat() {
                 const clientData = await checkClientInList(clientName, orgId);
                 console.log(clientData)
                 if (!clientData) {
-                    //chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} not found in client database. Please check the client list to ensure` });
-                    return generateErrorResponse(chatMessages, ` ${formattedClientName} not found in client database. Please check the client list to ensure.`);
-                    //return;
+                    chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} not found in client database. Please check the client list to ensure` });
+                    return;
                 }
                 //chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} found in client database! Filling W-9...` });
                 // Fill W-9 form
@@ -94,6 +102,11 @@ export default function DocumentFillerChat() {
                 .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
                 .join(' ');
             const fundName = JSON.parse(functionCall.arguments ?? '{}').fund ?? '';
+            let formattedFundName = fundName
+                .toLowerCase()
+                .split(' ')
+                .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
             chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` Searching for client ${formattedClientName}...` });
             // Check for type of orgID
             if (typeof orgId === 'string') {
@@ -103,9 +116,13 @@ export default function DocumentFillerChat() {
                     chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} not found in client database. Please check the client list to ensure.` });
                     return;
                 }
-                chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} found in client database! Filling subscription documents for ${fundName}...` });
-                const docMappingData = await findDocMapping(fundName);
-                
+                chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} found in client database! Filling the subscription document for ${formattedFundName}...` });
+                const docMappingData = await findDocMapping(fundName, orgId);
+                console.log('Doc mapping data (chatbox):', docMappingData);
+                if (!docMappingData) {
+                    chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: `There was an error finding ${formattedFundName} in the database. Please check the Fund List to ensure there is training data for this fund.` });
+                    return;
+                }
                 // Fill subscription documents
                 //await fillSubscriptionDocuments(clientData, fundName);
                 return;
