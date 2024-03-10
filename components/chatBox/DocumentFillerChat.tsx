@@ -148,7 +148,6 @@ export default function DocumentFillerChat() {
         }
     };
     
-    
     const { messages, input, handleInputChange, handleSubmit } = useChat({
         experimental_onFunctionCall: functionCallHandler,
     });
@@ -203,7 +202,7 @@ export default function DocumentFillerChat() {
         </section>
                 {/* Chat Input */}
                 <div className="p-4">
-                    <div className="absolute bottom-1 w-8/12">
+                    <div className="absolute bottom-5 w-8/12">
                     <form onSubmit={handleSubmit}>
                         <input
                             className="w-3/6 border-none bg-transparent p-2 text-md font-bold placeholder-gray-400 focus:outline-none"

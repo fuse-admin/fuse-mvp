@@ -6,13 +6,22 @@ const archivo = Archivo({ subsets: ["latin"] })
 
 const TeamSettings = () => {
   return (
-    <main className='flex flex-col justify-center items-center gap-3'>
-      <h1 className={`${archivo.className} text-center text-4xl text-yellow-500 font-bold`}>Team Settings</h1>
-      <div className='flex flex-col justify-center items-center mb-5'>
-          <h2 className='font-bold'>Switch Profile</h2>
+    <main className='h-screen w-screen flex flex-col p-10'>
+      <section>
+        <h1 className={`${archivo.className} text-yellow-500 font-extrabold text-4xl`}>Team Settings</h1>
+      </section>
+      <section>
+        <div className='flex flex-col justify-start'>
+          <h2 className={`${archivo.className} text-xl font-semibold mt-5 mb-1`}>Switch Your Profile</h2>
           <OrganizationSwitcher />
-      </div>
-        <OrganizationProfile />
+        </div>
+        <div className='flex-1 flex justify-center items-center'>
+          <OrganizationProfile />
+        </div>
+      </section>
+        
+
+
     </main>
   )
 }

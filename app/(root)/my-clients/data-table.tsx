@@ -100,7 +100,7 @@ export function ClientDataTable() {
     })
   
     return (
-      <div className="w-full overflow-x-auto p-3">
+      <div className="w-full overflow-x-auto">
         {isLoading ? (
           <Loader />
         ) : (
