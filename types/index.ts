@@ -21,9 +21,20 @@ export type AiChatBoxProps = {
   setSelectedTab: (tab: string) => void;
 };
 
+export type DemoChatBoxProps = {
+  selectedTab: string;
+  setSelectedTab: (tab: string) => void;
+};
+
+
+
 export type InstructionBoxProps = {
   selectedTab: string;
   openNewDocModal: () => void;
+};
+
+export type DemoInstructionBoxProps = {
+  selectedTab: string;
 };
 
 // ====== ClientData Type
