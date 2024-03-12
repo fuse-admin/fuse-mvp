@@ -2,12 +2,10 @@
 import { useChat } from "ai/react";
 import { useEffect, useRef } from "react";
 import { FunctionCallHandler, nanoid } from 'ai';
-import { checkClientInList, demoCheckClientInList } from '@/app/api/firm-clients/clients';
+import { demoCheckClientInList } from '@/app/api/firm-clients/clients';
 import { generateSuccessResponse } from '@/lib/utils';
 import ReactMarkdown from "react-markdown";
-import { useAuth } from '@clerk/nextjs';
-import OrganizationSetter from '../shared/OrganizationSetter';
-import { GenericClientData, TrainingData, DynamicFields } from '@/types';
+import { GenericClientData } from '@/types';
 
 const fillW9 = async (clientData: GenericClientData): Promise<string | null> => {
     fetch('/api/fillW9', {
@@ -30,31 +28,11 @@ const fillW9 = async (clientData: GenericClientData): Promise<string | null> => 
     return null;
 }
 
-const findDocMapping = async (fundName: string, orgId: string): Promise<TrainingData | null> => {
-    console.log('Finding document mapping for fund:', fundName);
-
-        const response = await fetch('/api/findDocMapping', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({fundName: fundName, orgId: orgId})
-        });
-
-        const responseData = await response.json();
-
-        if (response.ok) {
-            console.log('Document mapping found:', responseData);
-            console.log('Type of response data:', typeof responseData);
-            return responseData;
-        } else {
-            throw new Error('Error finding document training for this fund.');
-        }
-}
-
-const fillSubDoc = async (clientData: GenericClientData, docMappingData: TrainingData): Promise<string | null> => {
-    fetch('/api/fillSubDoc', {
+const fillDemoSubDoc = async (clientData: GenericClientData): Promise<string | null> => {
+    fetch('/api/fillDemoSubDoc', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({clientData, docMappingData})
+        body: JSON.stringify(clientData)
     })
     .then(response => response.blob())
     .then(blob => {
@@ -62,20 +40,17 @@ const fillSubDoc = async (clientData: GenericClientData, docMappingData: Trainin
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'filled_subscription_document.pdf';
+        a.download = 'filled_ironwood.pdf';
         document.body.appendChild(a);
         a.click();
         window.URL.revokeObjectURL(url);
     })
-    .catch(error => console.error('Error in filling subscription document:', error));
+    .catch(error => console.error('Error in filling Ironwood Sub-doc:', error));
     return null;
 }
 
+
 export default function DemoDocFillerChat() {
-    // Set up organization setter
-    <OrganizationSetter />
-    // Get organization ID from Clerk for client search
-    const {orgId} = useAuth();
     // Define function call handler
     const functionCallHandler: FunctionCallHandler = async(chatMessages, functionCall) => {
         console.log('Function call handler called: ', functionCall);
@@ -104,42 +79,28 @@ export default function DemoDocFillerChat() {
             await fillW9(clientData);
             return generateSuccessResponse(chatMessages, `W-9 form filled! Check your downloads folder for the filled form.`);
         }
-
         if (functionCall.name === 'fill-subscription-documents'){
+            // Ensure client name is always a string 
             const clientName = JSON.parse(functionCall.arguments ?? '{}').name ?? '';
             let formattedClientName = clientName
                 .toLowerCase()
                 .split(' ')
                 .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
                 .join(' ');
-            const fundName = JSON.parse(functionCall.arguments ?? '{}').fund ?? '';
-            let formattedFundName = fundName
-                .toLowerCase()
-                .split(' ')
-                .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(' ');
+
             chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` Searching for client ${formattedClientName}...` });
-            // Check for type of orgID
-            if (typeof orgId === 'string') {
-                // Get client info from database
-                const clientData = await checkClientInList(clientName, orgId);
-                if (!clientData) {
-                    chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} not found in client database. Please check the client list to ensure.` });
-                    return;
-                }
-                chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} found in client database! Filling the subscription document...` });
-                const docMappingData = await findDocMapping(fundName, orgId);
-                if (!docMappingData) {
-                    chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: `There was an error finding ${formattedFundName} in the database. Please check the Fund List to ensure there is training data for this fund.` });
-                    return;
-                }
-                // Fill subscription documents
-                await fillSubDoc(clientData, docMappingData);
-                return generateSuccessResponse(chatMessages, `Subscription document for ${docMappingData.fundName} filled! Check your downloads folder for the filled document.`);
-            } else {
-                chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` Cannot find the organization you are a part of. Please confirm your organization on the Team Settings page on the Dashboard.` });
+
+            // Get client info from database
+            const clientData = await demoCheckClientInList(clientName);
+            console.log(clientData)
+            if (!clientData) {
+                chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} not found in client database. Please check the client list to ensure` });
                 return;
             }
+            //chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` ${formattedClientName} found in client database! Filling W-9...` });
+            // Fill Ironwood sub-doc
+            await fillDemoSubDoc(clientData);
+            return generateSuccessResponse(chatMessages, `Ironwood Sub-doc filled! Check your downloads folder for the filled document.`);
         }
     };
     

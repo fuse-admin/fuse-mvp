@@ -16,6 +16,7 @@ export default authMiddleware({
     '/api/chat',
     '/api/fillW9',
     '/api/firm-clients',
+    '/api/fillDemoSubDoc',
   ]
 });
  

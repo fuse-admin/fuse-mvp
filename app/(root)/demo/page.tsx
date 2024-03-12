@@ -3,6 +3,9 @@ import React, { useState } from "react"
 import DemoChatBox from "@/components/demo/DemoChatBox";
 import DemoInstructionBox from "@/components/demo/DemoInstructionBox";
 import Loading from "@/components/shared/Loading";
+import { Archivo } from 'next/font/google'
+
+const archivo = Archivo({ subsets: ["latin"] })
 
 const Demo = () => {
   const [selectedTab, setSelectedTab] = useState('document-filler');
@@ -10,6 +13,8 @@ const Demo = () => {
 
   return (
       <main className='grid grid-cols-1 md:grid-cols-2 h-screen'>
+        {/* Page Title */}
+
         {isLoading ? (
           <Loading />
         ) : (

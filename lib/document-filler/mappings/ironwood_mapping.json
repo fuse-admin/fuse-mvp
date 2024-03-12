@@ -1,0 +1,11 @@
+{
+    "Account Name": "name", 
+    "Amount": 500000,
+    "Primary Name": "name", 
+    "Primary Address": "address", 
+    "Primary City and State": "city_state_zip",
+    "Phone Number": "telephone",
+    "Email": "email",
+    "SSN": "social_security_number",
+    "Subscribers Name": "name"
+}
