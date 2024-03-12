@@ -7,7 +7,7 @@ const archivo = Archivo({ subsets: ["latin"] })
 
 const AboutUs = () => {
   return (
-    <main className='h-screen w-screen flex flex-col p-10'>
+    <main className='h-screen w-screen flex flex-col p-10 mb-10'>
       <section>
         <h1 className={`${archivo.className} text-yellow-500 font-extrabold text-4xl`}>About Us</h1>
       </section>
@@ -39,7 +39,7 @@ const AboutUs = () => {
                 translateZ="60"
                 className=" text-neutral-800 text-sm max-w-sm mt-2 dark:text-neutral-300"
               >
-                CEO
+                CEO, Co-Founder
               </CardItem>
               <CardItem
                 translateZ="100"
@@ -48,10 +48,10 @@ const AboutUs = () => {
                 className="w-full mt-4"
               >
                 <Image
-                  src = "/assets/images/kwabs2.webp"
+                  src = "/assets/images/kwabs.webp"
                   height={1024}
                   width={1024}
-                  className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                  className="h-80 w-full object-cover rounded-xl group-hover/card:shadow-xl"
                   alt="thumbnail"
                 />
               </CardItem>
@@ -80,7 +80,7 @@ const AboutUs = () => {
                 translateZ="60"
                 className=" text-neutral-800 text-sm max-w-sm mt-2 dark:text-neutral-300"
               >
-                CCO, COO
+                CCO, Co-Founder
               </CardItem>
               <CardItem
                 translateZ="100"
@@ -92,7 +92,7 @@ const AboutUs = () => {
                   src = "/assets/images/bobby.webp"
                   height={1024}
                   width={1024}
-                  className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                  className="h-80 w-full object-cover rounded-xl group-hover/card:shadow-xl"
                   alt="thumbnail"
                 />
               </CardItem>

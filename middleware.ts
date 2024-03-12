@@ -13,6 +13,9 @@ export default authMiddleware({
     '/api/webhook/clerk',
     '/api/uploadthing',
     '/api/submitTrainingData',
+    '/api/chat',
+    '/api/fillW9',
+    '/api/firm-clients',
   ]
 });
  

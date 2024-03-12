@@ -3,7 +3,7 @@ import { Archivo } from 'next/font/google';
 import { Button } from '../ui/button';
 import { ClientModal } from '../chatBox/ClientModal';
 import { useState } from 'react';
-import ClientDataTable from '@/app/(root)/my-clients/data-table';
+import DemoClientDataTable from '@/app/(root)/demo-clients/client-data-table';
 
 const archivo = Archivo({ subsets: ["latin"] })
 
@@ -31,7 +31,7 @@ export default function DemoDocFillerCard() {
             </section>
             <ClientModal isOpen={isModalOpen} onClose={closeModal}>
                 <h2 className={`${archivo.className} text-2xl font-extrabold text-yellow-500 mb-4 text-center`}>My Clients</h2>
-                <ClientDataTable />
+                <DemoClientDataTable />
             </ClientModal>
         </main>
     )
