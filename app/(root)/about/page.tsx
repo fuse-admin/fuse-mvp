@@ -13,20 +13,18 @@ const AboutUs = () => {
       </section>
       <section className='flex flex-rows gap-3'>
         <div className='flex flex-col justify-start gap-3 mt-3'>
-          <h2 className='text-xl font-bold font-style: italic'>Our Origin Story</h2>
-          <p className='flex text-justify'>Our team has been in the Registered Investment Advisory(RIA) space for nearly 5 years.
-          We have worked with a variety of firms and have seen the pain points that come with the territory. 
-          We have seen the inefficiencies that come with the territory and have decided to do something about it.
-          We are a team of developers, designers, and business professionals who are passionate about making the RIA space more efficient and effective.
+          <h2 className='text-xl font-bold font-style: italic'>Empowering Investment Advisors Through Technology</h2>
+          <p className='flex text-justify'>Fuse AI, based in Austin, Texas, was founded in 2023 by Kwabena Andoh-Baidoo and Bobby Johnson. 
+          We saw a big problem in how Registered Investment Advisors(RIAs) handled their alternative investment workload: too much manual work with documents and data. 
+          So, we built a solution that uses AI to automate these tasks, letting advisors focus on their clients and growth.
           </p>
         </div>
         
       </section>
       <section className='mt-10'>
         <h2 className='text-xl font-bold font-style: italic'>Our Team</h2>
-        <p>We have a small but effective team working on the most important things at Fuse Labs</p>
-        <div className='flex flex-cols gap-10'>
-          <CardContainer className="inter-var">
+        <div className='flex flex-cols gap-10 mb-10'>
+          <CardContainer className="inter-var max-w-sm">
             <CardBody className="bg-yellow-500 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
               <CardItem
                 translateZ="50"
@@ -51,7 +49,7 @@ const AboutUs = () => {
                   src = "/assets/images/kwabs.webp"
                   height={1024}
                   width={1024}
-                  className="h-80 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                  className="max-h-60 w-full object-cover rounded-xl group-hover:shadow-xl"
                   alt="thumbnail"
                 />
               </CardItem>
@@ -67,7 +65,7 @@ const AboutUs = () => {
               </div>
             </CardBody>
           </CardContainer>
-          <CardContainer className="inter-var">
+          <CardContainer className="inter-var max-w-sm">
             <CardBody className="bg-yellow-500 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
               <CardItem
                 translateZ="50"
@@ -92,7 +90,7 @@ const AboutUs = () => {
                   src = "/assets/images/bobby.webp"
                   height={1024}
                   width={1024}
-                  className="h-80 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                  className="max-h-60 w-full object-cover rounded-xl group-hover:shadow-xl"
                   alt="thumbnail"
                 />
               </CardItem>

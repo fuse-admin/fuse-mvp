@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image"
 import { Archivo } from "next/font/google"
 import { Button } from '@/components/ui/button';
+import { Organization } from '@clerk/nextjs/server';
+import { OrganizationSwitcher } from '@clerk/nextjs';
 
 const archivo = Archivo({ subsets: ["latin"] })
 
@@ -74,51 +76,6 @@ export default function Home() {
             onLoad={() => setImageLoaded(true)}/>
         </div>
       </section>
-      {/* Features section 
-      <section className="h-screen relative flex flex-col p-3 gap-3">
-        <h1 className={`${archivo.className} text-4xl p-2 text-yellow-500`}>The current alternatives operations process is plagued with issues...</h1>
-        <ul className='w-full items-center justify-between flex flex-col p-3 gap-5 md:flex-row'>
-          <li>
-            <h1 className={`${archivo.className} text-4xl p-2 text-yellow-500 font-semibold`}>Manual Paperwork</h1>
-            <Image
-              src="/assets/images/paper.svg"
-              width={350}
-              height={350}
-              loading='eager'
-              className='self-center dark:hue-rotate-180'
-              alt='Manual Paperwork'/>
-              
-          </li>
-          <li>
-            <h1 className={`${archivo.className} text-4xl p-2 text-yellow-500 font-semibold`}>Endless Portals</h1>
-            <Image
-              src="/assets/images/portals.svg"
-              width={350}
-              height={350}
-              loading='eager'
-              className='dark:hue-rotate-180'
-              alt='Endless Portals'/>
-              
-          </li>
-          <li>
-            <h1 className={`${archivo.className} text-4xl p-2 text-yellow-500 font-semibold`}>Archaic Systems</h1>
-            <Image
-              src="/assets/images/archaic.svg"
-              width={350}
-              height={350}
-              loading='eager'
-              className='self-center dark:hue-rotate-180'
-              alt='Archaic Systems'/>
-              
-          </li>
-        </ul>
-        <Button className="w-auto relative self-center p-3 border-2 border-yellow-500 md:text-2xl hover:bg-yellow-500 hover:text-white sm: mb-10" variant="outline">
-          <a href='/solutions'>
-            Find Out How We're Solving These Issues
-          </a>
-        </Button>
-      </section>
-      */}
     </main>
   );
 }

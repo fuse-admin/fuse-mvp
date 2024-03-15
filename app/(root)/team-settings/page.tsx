@@ -1,10 +1,12 @@
 import React from 'react'
-import { OrganizationSwitcher, OrganizationProfile } from "@clerk/nextjs";
+import { OrganizationSwitcher, OrganizationProfile, auth } from "@clerk/nextjs";
 import { Archivo } from 'next/font/google';
 
 const archivo = Archivo({ subsets: ["latin"] })
 
 const TeamSettings = () => {
+  const { orgId } = auth()
+
   return (
     <main className='h-screen w-screen flex flex-col p-10'>
       <section>
