@@ -106,6 +106,7 @@ export const CardItem = ({
   rotateX = 0,
   rotateY = 0,
   rotateZ = 0,
+  onClick,
   ...rest
 }: {
   as?: React.ElementType;
@@ -117,6 +118,7 @@ export const CardItem = ({
   rotateX?: number | string;
   rotateY?: number | string;
   rotateZ?: number | string;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isMouseEntered] = useMouseEnter();
@@ -138,6 +140,7 @@ export const CardItem = ({
     <Tag
       ref={ref}
       className={cn("w-fit transition duration-200 ease-linear", className)}
+      onClick={onClick}
       {...rest}
     >
       {children}

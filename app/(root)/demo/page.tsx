@@ -24,19 +24,19 @@ const Demo = () => {
 
   return (
     <main className='grid grid-cols-1 md:grid-cols-2 h-screen'>
-      <section className='w-screen h-screen ml-5'>
+      <section className="w-full ml-14">
+        <div className="w-full">
+        <DemoInstructionBox
+          selectedTab={selectedTab}
+        />
+        </div>
+      </section>
+      <section className='w-full h-screen'>
         <div className="w-full"> 
           <DemoChatBox
             selectedTab={selectedTab}
             setSelectedTab={setSelectedTab}
           />
-        </div>
-      </section>
-      <section>
-        <div className="w-full">
-        <DemoInstructionBox
-          selectedTab={selectedTab}
-        />
         </div>
       </section>
         {/* Welcome Modal */}

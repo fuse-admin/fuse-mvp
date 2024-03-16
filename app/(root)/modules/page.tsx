@@ -20,21 +20,21 @@ const Module = () => {
         ) : (
           <>
         {/* ChatBox Section */}
-        <section className='w-screen h-screen ml-5'>
-          <div className="w-full"> 
-            <AiChatBox
-              selectedTab={selectedTab}
-              setSelectedTab={setSelectedTab}
-            />
-          </div>
-        </section>
         <section>
-          <div className="w-full">
+          <div className="w-full h-screen ml-14">
           <InstructionBox
             selectedTab={selectedTab}
             openNewDocModal={openNewDocModal}
 
           />
+          </div>
+        </section>
+        <section className='w-screen h-screen'>
+          <div className="w-full"> 
+            <AiChatBox
+              selectedTab={selectedTab}
+              setSelectedTab={setSelectedTab}
+            />
           </div>
         </section>
         </>

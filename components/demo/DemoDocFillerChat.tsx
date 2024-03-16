@@ -158,10 +158,10 @@ export default function DemoDocFillerChat() {
         </section>
                 {/* Chat Input */}
                 <div className="p-4">
-                    <div className="absolute bottom-5 w-8/12">
+                    <div className="absolute bottom-5 w-4/5">
                     <form onSubmit={handleSubmit}>
                         <input
-                            className="w-3/6 border-none bg-transparent p-2 text-md font-bold placeholder-gray-400 focus:outline-none"
+                            className="w-3/6 border-none bg-transparent p-2 text-md font-bold placeholder-gray-400 focus:outline-none animate-bounce focus-within:animate-none"
                             value={input}
                             placeholder="Ask a question or put your request here..."
                             onChange={handleInputChange}
