@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Button } from "../ui/button"
 import NavItems from "./NavItems"
 import MobileNav from "./MobileNav"
+import { OrganizationSwitcher } from "@clerk/nextjs"
 
 const Header = () => {
   return (
@@ -15,12 +16,13 @@ const Header = () => {
             </Link>
 
             <SignedIn>
-                <nav className="md:flex-between hidden w-full max-w-xs">
+                <nav className="md:flex-between hidden w-full max-w-xs md:justify-between">
                    <NavItems /> 
                 </nav>
             </SignedIn>
             <div className="flex w-32 justify-end gap-3 mr-5">
                 <SignedIn>
+                    <OrganizationSwitcher />
                     <UserButton afterSignOutUrl="/" />
                     <MobileNav />
                 </SignedIn>

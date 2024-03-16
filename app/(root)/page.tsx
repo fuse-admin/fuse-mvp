@@ -17,7 +17,7 @@ export default function Home() {
   useEffect(() => {
     const options = {
       strings: [
-        'Future of alts operations is now',
+        'The future of alts operations is now',
         'Take back your time',
         'Connect your processes with Fuse', 
       ],
@@ -51,7 +51,7 @@ export default function Home() {
         style={{ height: '80vh' }}>
         {/* Text container with a fixed height to prevent layout shift */}
         <div className='w-full text-left mt-0 mb-0'>
-          <div className='text-5xl p-4 text-yellow-500 font-bold flex justify-start items-left' style={{ height: '200px' }}>
+          <div className='text-5xl p-3 text-yellow-500 font-bold flex justify-start items-left' style={{ height: '150px' }}>
             <span 
             className={archivo.className} 
             ref={el} />

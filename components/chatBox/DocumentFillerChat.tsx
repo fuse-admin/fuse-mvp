@@ -105,7 +105,7 @@ export default function DocumentFillerChat() {
                 await fillW9(clientData);
                 return generateSuccessResponse(chatMessages, `W-9 form filled! Check your downloads folder for the filled form.`);
             } else {
-                chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` Cannot find the organization you are a part of. Please confirm your organization on the Team Settings page on the Dashboard.` });
+                chatMessages.push({ id: nanoid(), name: 'System', role: 'system', content: ` Cannot find the organization you are a part of. Please confirm your organization in the header or on the Team Settings page of the Dashboard.` });
                 return;
             }
         }
@@ -172,14 +172,14 @@ export default function DocumentFillerChat() {
  
     return (
         <div className="grid grid-rows-2">
-            <section ref={messagesContainerRef} className="flex-grow overflow-auto mb-10 max-h-[580px]">
+            <section ref={messagesContainerRef} className="flex-grow overflow-auto mb-10 max-h-[65vh]">
             {filteredMessages.map((m) => (
                 <div className={`text-md p-3 ${m.role === 'user' ? 'font-extrabold' : 'text-gray-500'}`} key={m.id}>
                     {m.role === 'user' ? (
                         <p className='font-semibold'>You: {m.content}</p>
                     ) : (
                         <div>
-                        AI: {m.content.split('\n').map((line, index) => {
+                        FuseBot: {m.content.split('\n').map((line, index) => {
                             // Check if line contains Markdown indicators like "**" or "##"
                             const hasMarkdown = /(\*\*|##)/.test(line);
                             return (

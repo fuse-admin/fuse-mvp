@@ -128,14 +128,14 @@ export default function DemoDocFillerChat() {
  
     return (
         <div className="grid grid-rows-2">
-            <section ref={messagesContainerRef} className="flex-grow overflow-auto mb-10 max-h-[580px]">
+            <section ref={messagesContainerRef} className="flex-grow overflow-auto mb-10 max-h-[65vh]">
             {filteredMessages.map((m) => (
                 <div className={`text-md p-3 ${m.role === 'user' ? 'font-extrabold' : 'text-gray-500'}`} key={m.id}>
                     {m.role === 'user' ? (
                         <p className='font-semibold'>You: {m.content}</p>
                     ) : (
                         <div>
-                        AI: {m.content.split('\n').map((line, index) => {
+                        FuseBot: {m.content.split('\n').map((line, index) => {
                             // Check if line contains Markdown indicators like "**" or "##"
                             const hasMarkdown = /(\*\*|##)/.test(line);
                             return (

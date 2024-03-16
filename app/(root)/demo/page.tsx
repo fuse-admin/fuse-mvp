@@ -78,7 +78,10 @@ const Demo = () => {
                           alt="Document-filler"/>
                       </div>
                     </li>
-                    <li className="flex flex-col justify-center items-center">
+                    <li className="flex flex-col justify-center items-center relative">
+                      <div className="absolute top-0 right-12 w-1/3 h-1/3 bg-red-600 bg-opacity-75 flex justify-center items-center rounded-xl">
+                        <span className="text-white font-bold">Coming Soon</span>
+                      </div>
                       <div className="flex flex-row justify-between items-center w-full">
                         <div>
                           <h3 className="text-xl mb-0">Custom Reports</h3>

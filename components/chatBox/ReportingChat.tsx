@@ -8,7 +8,7 @@ export default function ReportingChat() {
             </div>
             <div className="text-center">
                 <Image 
-                    src="/assets/images/coming-soon.svg"
+                    src="/assets/images/coming-soon.webp"
                     alt="Coming soon"
                     loading="eager" 
                     width={500} 
