@@ -20,6 +20,8 @@ try {
     .map(([key, value]) => `${key}: ${value}`)
     .join(', ');
 
+    console.log('training data:', trainingDataString)
+
 
     // Use GPT to match client data and training data => return data to fill subdoc
     const openai = new OpenAI()
@@ -32,7 +34,7 @@ try {
             },
             {
                 role: 'user',
-                content: `Here is the client data ${clientDataString} and here is the training data: ${trainingDataString}. Please give me the appropriate pairing.`
+                content: `Here is the client data ${clientDataString} and here is the training data: ${trainingDataString}. Please give me the appropriate pairing. Remember to match the values of the client data with the keys of the training data. Use the values of the training data as a guide for what to choose. Please always pair the training keys(1st item before the colon) with the client values(2nd item after the colon).`
             }
         ]
     });

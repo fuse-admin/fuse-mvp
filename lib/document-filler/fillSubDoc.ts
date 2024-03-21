@@ -24,6 +24,9 @@ export async function fillSubDoc(pdfUrl: string, docFillData: any){
             const value = docFillData[pdfFieldName] || '';
             field.setText(value);
         }
+        if (!field) {
+            console.log(`Field ${pdfFieldName} not found in the PDF`);
+        }
     });
 
     // Serialize the PDFDocument to bytes

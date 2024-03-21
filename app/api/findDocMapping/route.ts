@@ -43,7 +43,7 @@ export async function POST(req: NextRequest){
             },
             {
                 role: "user",
-                content: `Find the closest match to ${fundNameInput} from this list of funds: ${fundNames.join(", ")}.`
+                content: `Find the closest match to ${fundNameInput} from this list of funds: ${fundNames.join(", ")}. Please only return the fund name nothing else!`
             }
         ]
     });
