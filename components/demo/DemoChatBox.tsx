@@ -13,13 +13,17 @@ export default function DemoChatBox({ selectedTab, setSelectedTab}: DemoChatBoxP
     }
     return (
         <main className="w-full h-full justify-center items-center">
-            <Tabs defaultValue={selectedTab} onValueChange={handleTabChange} className="w-[600px]">
+            <Tabs defaultValue={selectedTab} onValueChange={handleTabChange} className="w-4/5">
                 <TabsList className="flex justify-between w-full h-12 rounded-xl">
                     <TabsTrigger className={`${archivo.className} text-lg`} value="document-filler">Document Filler</TabsTrigger>
+                    <TabsTrigger className={`${archivo.className} text-lg`} value="custom-reports">Custom Reporting</TabsTrigger>
                     <TabsTrigger className={`${archivo.className} text-lg`} value="query">Query</TabsTrigger>
                 </TabsList>
                 <TabsContent value="document-filler">
                     <DemoDocFillerChat />
+                </TabsContent>
+                <TabsContent value="custom-reports">
+                    This is for custom reports.
                 </TabsContent>
                 <TabsContent value="query">
                     This is for querying responses.

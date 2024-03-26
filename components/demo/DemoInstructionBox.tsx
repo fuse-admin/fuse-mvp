@@ -40,7 +40,7 @@ export default function InstructionBox({ selectedTab }: DemoInstructionBoxProps)
             case "query":
                 api.scrollTo(1);
                 break;
-            case "reporting":
+            case "custom-reports":
                 api.scrollTo(2);
                 break;
             default:

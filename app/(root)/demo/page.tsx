@@ -49,12 +49,12 @@ const Demo = () => {
                 <p className='flex text-justify mb-3'>
                   Fuse simplifies the alternative investment workflow. 
                   We offer a number of tools to assist the manual processes:</p>
-                  <ul className="grid grid-cols-2 gap-5 mt-7">
+                  <ul className="grid grid-cols-2 gap-10 mt-7">
                     <li className="flex flex-col justify-center items-center">
                       <div className="flex flex-row justify-between items-center w-full">
                         <div>
                           <h3 className="text-xl mb-0">Document Filler</h3>
-                          <p>Fill in alternative investment documents in seconds using data from your CRM</p>
+                          <p>Fill out alternative investment documents in seconds using data from your CRM</p>
                         </div>
                         <Image
                           src="/assets/images/doc_filler.webp"
@@ -75,7 +75,7 @@ const Demo = () => {
                           height={1024}
                           width={1024}
                           className="w-12 h-12"
-                          alt="Document-filler"/>
+                          alt="Document-query"/>
                       </div>
                     </li>
                     <li className="flex flex-col justify-center items-center relative">
@@ -84,29 +84,46 @@ const Demo = () => {
                       </div>
                       <div className="flex flex-row justify-between items-center w-full">
                         <div>
-                          <h3 className="text-xl mb-0">Custom Reports</h3>
+                          <h3 className="text-xl mb-0">Custom Reporting</h3>
                           <p>Generate custom reports based on your alternative investment data</p>
                         </div>
                         <Image
-                          src="/assets/images/custom_reports.webp"
+                          src="/assets/images/custom_reporting.webp"
                           height={1024}
                           width={1024}
                           className="w-12 h-12"
-                          alt="Document-filler"/>
+                          alt="Custom-reporting"/>
+                      </div>
+                    </li>
+                    <li className="flex flex-col justify-center items-center relative">
+                      <div className="absolute top-0 right-12 w-1/3 h-1/3 bg-red-600 bg-opacity-75 flex justify-center items-center rounded-xl">
+                        <span className="text-white font-bold">Coming Soon</span>
+                      </div>
+                      <div className="flex flex-row justify-between items-center w-full">
+                        <div>
+                          <h3 className="text-xl mb-0">Transaction Reporting</h3> 
+                          <p>Generate transactions from statements and notices for your Portfolio Accounting System(PAS)</p>
+                        </div>
+                        <Image
+                          src="/assets/images/transaction_reporting.webp"
+                          height={1024}
+                          width={1024}
+                          className="w-12 h-12"
+                          alt="Transaction-reporting"/>
                       </div>
                     </li>
                     <li className="flex flex-col justify-center items-center">
                       <div className="flex flex-row justify-between items-center w-full">
                         <div>
                           <h3 className="text-xl mb-0">General Knowledge</h3>
-                          <p>Ask Fuse any question about alternative investments to fill knowledge gaps</p>
+                          <p>Ask Fuse any questions about alternative investments or anything else in the same chat</p>
                         </div>
                         <Image
                           src="/assets/images/general_knowledge.webp"
                           height={1024}
                           width={1024}
                           className="w-12 h-12"
-                          alt="Document-filler"/>
+                          alt="General-knowledge"/>
                       </div>
                     </li>
                   </ul>

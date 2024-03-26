@@ -14,35 +14,28 @@ const Module = () => {
   const closeNewDocModal = () => setIsNewDocModalOpen(false);
 
   return (
-      <main className='grid grid-cols-1 md:grid-cols-2 h-screen'>
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <>
-        {/* ChatBox Section */}
-        <section>
-          <div className="w-full h-screen ml-14">
-          <InstructionBox
+    <main className='grid grid-cols-1 md:grid-cols-2 h-screen'>
+      {/* ChatBox Section */}
+      <section className="w-full ml-14">
+        <div className="w-full">
+        <InstructionBox
+          selectedTab={selectedTab}
+          openNewDocModal={openNewDocModal}
+        />
+        </div>
+      </section>
+      <section className='w-full h-screen'>
+        <div className="w-full"> 
+          <AiChatBox
             selectedTab={selectedTab}
-            openNewDocModal={openNewDocModal}
-
+            setSelectedTab={setSelectedTab}
           />
-          </div>
-        </section>
-        <section className='w-screen h-screen'>
-          <div className="w-full"> 
-            <AiChatBox
-              selectedTab={selectedTab}
-              setSelectedTab={setSelectedTab}
-            />
-          </div>
-        </section>
-        </>
-        )}
-        {/* NewDocModal */}
-        <NewDocModal isOpen={isNewDocModalOpen} onClose={closeNewDocModal}> 
-        </NewDocModal>
-      </main>
+        </div>
+      </section>
+      {/* NewDocModal */}
+      <NewDocModal isOpen={isNewDocModalOpen} onClose={closeNewDocModal}> 
+      </NewDocModal>
+    </main>
   )
 }
 
